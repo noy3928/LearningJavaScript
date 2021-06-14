@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dom생성과 수정 그리고 삭제하기</title>
+  </head>
+  <body>
+    <h2>상품 목록</h2>
+
+    <ul id="product-list"></ul>
+
+    <script>
+      const products = [
+        { id: "p-01", name: "상품1" },
+        { id: "p-02", name: "상품2" },
+        { id: "p-03", name: "상품3" },
+      ];
+      const productListE1 = document.getElementById("product-list");
+      products
+        .map((product) => {
+          const newE1 = document.createElement("li");
+          newE1.id = product.id;
+          newE1.innerText = product.name;
+          return newE1;
+        })
+        .forEach((productE1) => {
+          productListE1.appendChild(productE1);
+        });
+      setTimeout(() => {
+        const secondE1 = document.querySelector("ul li:nth-child(2)");
+        secondE1.remove();
+      }, 1000);
+      productListE1.after("<div>잘못된 사용</div>"); //after 메소드를 이용하여 요소 다음으로 노드를 추가합니다. 문자열을 전달하면 단순히 텍스트 노드가 추가됩니다. 정상적으로 노드를 추가할려면 노드 객체가 전달되어야 합니다.
+      productListE1.insertAdjacentHTML("afterend", "<p>추가된 문단</p>"); //주어진 html텍스트를 파싱하여 만들어진 노드 객체를 주어진위치로 추가합니다.
+    </script>
+  </body>
+</html>

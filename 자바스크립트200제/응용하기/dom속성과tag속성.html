@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dom속성과 태그 속성 이해하기 예제</title>
+  </head>
+  <body>
+    <div id=" div1" class="div-class">Div 태그</div>
+    <input id="input1" type="text" value="jay" />
+
+    <script>
+      const divE1 = document.getElementById("div1");
+      const input1 = document.getElementById("input1");
+
+      console.log(divE1.hasAttribute("id")); // 해당 id값을 가졌는지 확인한다.
+      console.log(divE1.getAttribute("id")); // id값을 가져온다.
+      console.log(divE1.id); // id값을 ㅏ져온다.
+
+      divE1.removeAttribute("id");
+      divE1.setAttribute("id", "new-id");
+    </script>
+  </body>
+</html>

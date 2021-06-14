@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dom 내비게이션</title>
+  </head>
+  <body>
+    <h1>국내여행지</h1>
+
+    <ul>
+      <li>서울</li>
+      <li>제주</li>
+      <li>부산</li>
+      <li>속초</li>
+    </ul>
+
+    <script>
+      const bodyE1 = document.body;
+      const bodyElChildren = bodyE1.children; //dom객체의 body속성을 통해 body요소에 접근할 수 있습니다.
+      console.log(bodyElChildreno);
+
+      const cityList = bodyElChildren[1]; //body요소의 2번째 요소인 ul요소를 cityList변수에 대입합니다.
+
+      console.log(cityList.children.length); //ul요소의 자식 요소의 갯수를 출력하고 item메소드를 통해 2번째 요소인 제주를 콘솔에 출력합니다.
+      const item2 = cityList.children.item(1);
+      console.log(item2);
+      console.log(item2.previousElementSibling); //li제주 요소를 기준으로 이전 요소인 서울 요소를 콘솔에 출력합니다.
+      console.log(item2.previousSibling.previousSibling); //
+
+      console.log(cityList.childNodes); // ul요소의 하위 노드들을 콘솔에 출력합니다. html코드 상에 각 태그들 다음으로 개행을 했기 때문에 각 요소 중간에 텍스트 노드가 들어가 있는 것을 확인할 수 있습니다.
+      console.log(item2.firstChild); // 제주 요소의 첫번째 노드와 마지막 노드를 콘솔에 출력합니다.
+      console.log(item2.lastChild); //
+
+      console.log(item2.parentElement); //제주 요소의 부모 요소를 콘솔에 출력합니다.
+    </script>
+  </body>
+</html>
