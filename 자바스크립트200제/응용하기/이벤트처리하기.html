@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta />
+    name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 처리하기 예제</title>
+    <script>
+      const inputContainer = document.getElementById("input-container");
+
+      console.log(inputContainer); // 아이디가 input-container인 div가 존재하지만 콘솔에는 null이 출력됩니다. 브라우저가 26라인을 읽고 dom을 생성하기 전에 자바스크립트가 먼저 실행되어 이러한 문제가 발생합니다.
+
+      //dom이 생성되기 전에 코드가 실행되는 문제를 해겷기 위ㅐ서 DOMContentLoaded이벤트를 이용할 수 있습니다. 이 이벤트는 documnet에 직접 리스너 함수를 등록해야 합니다. DOMContentLoaded이벤트는 html전체가 로드 되고 dom 트리가 완성이 되면 호출됩니다. 하지만 이때깢는 이미지나 스타일시트같은 외부 리소스느 로드되지 않은 상태입니다. 외부 리소스까지 로드된 이벤틀르 처리하려면 onload 이벤트를 이용할 수 있습니다. onload이벤트는 window.onload 함수를 할당하는 방식으로 사용할 수 있습니다.
+      document.addEventListener("DOMContentLoaded", (e) => {
+        const inputContainer = document.getElementById("input-container");
+        console.log(inputContainer);
+
+        const inputE1 = inputContainer.querySelector("input");
+        inputE1.addEventListener("keydown", (e) => {
+          console.log(`keyCode: ${e.keyCode}`); //어떤 키가 눌렸는지 확인할 수 있습니다.
+        });
+
+        const buttonE1 = inputContainer.querySelector("button");
+        buttonE1.addEventListener("click", (e) => {
+          console.log(e.target); //버튼 요소를 클릭하면 클릭 이벤트가 발생하고 리스너 함수가 호출됩니다. 이벤트 객체의 target속성은클릭한 요소를 가리킵니다. 화살표 함수로 이벤트 리스너를 등록하지 않고 일반 함수로 등록시 this는 target과 같습니다.
+          console.log(`input value : ${inputE1.value}`);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="input-container">
+      <input type="text" />
+      <button>버튼</button>
+    </div>
+  </body>
+</html>
