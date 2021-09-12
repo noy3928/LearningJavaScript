@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section class="hero">
+        <h1>스크롤을 아래로 내려보세요.</h1>
+    </section>
+    
+    <nav>
+        <a href="https://javascrip-200.com">자바스크립트200제</a>
+    </nav>
+
+    <section class="articles">
+    </section>
+
+    <script>
+        const nav = document.querySelector('nav');
+        const navTopOffset = nav.offsetTop; //offsetTop속성을 통해 부모로부터 얼마나 멀리 떨어져 있는지를 픽셀 단위 숫자값으로 가져옵니다. offsetTop는 브라우저 좌측으로부터 얼마나 떨어져 있는지를 알 수 있습니다. 
+
+        //window객체의 pageYOffset 속성을 이용하면 현재 스크롤된 화면이 브라우저 상단으로부터 얼마나 멀이 떨어져 있는지를 알 수 있습니다. 마찬가지로 pageXOffset는 브라우저 왼쪽으로부터 얼마나 떨어져 있는지 알 수 있습니다. 스크롤시 브라우저 상단으로부터의 차이가 내비게이션 요소의 브라우저 상단과의 차이보다 커지거나 같을 경우 내비게이션을 상단에 고정 시킵니다. 그 외에는 원래 상태로 변경해줍니다. 
+        window.addEventListener('scroll', e => {
+            if(window.pageXOffset >= navTopOffset){
+                nav.style.position = 'fixed';
+                nav.style.top = 0
+                nav.style.left = 0
+                nav.style.right = 0;
+            }else{
+                nav.style.position = '';
+                nav.style.top = '';
+            }
+        })
+    </script>
+</body>
+</html>
