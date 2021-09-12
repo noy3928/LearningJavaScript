@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 폼 태그와 입력 요소는 name 속성을 기반으로 자바스크립트 상에서 해당 요소에 접근할 수 있습니다. -->
+    <form name="order">
+        <fieldset name="userInfo">
+            <legend>주문자 정보</legend>
+            이름 : <input name="name" type="text">
+            전화번호 : <input name="tel" type="tel">
+        </fieldset>
+
+        <fieldset name="productInfo">
+            <legend>상품 정보</legend>
+            상품명 : <input name="productName" type="text">
+            색상 : 
+            <select name="color">
+                <option value="black">검은색</option>
+                <option value="yellow">노란색</option>
+            </select>
+        </fieldset>
+
+        <button id="btn1" type="button">button 처리</button>
+        <button type="submit">submit 제출</button>
+    </form>
+
+    <script>
+        const orderForm = document.forms.order,
+        userField = orderForm.elements.userInfo,
+        productField = orderForm.elements.productInfo;
+
+        document.getElementById('btn1').addEventListener('click', e => {
+            const {name, tel} = userField.elements;
+            console.log(`${name.value} 사용자(${tel.value})로 주문합니다.`);
+        })
+
+        //폼 요소는 submit 버튼을 클릭하면 submit 이벤트를 발생합니다. 이떄 해당 폼의 input 정보를 이용해 주어진 URL에 HTTP요청을 보냅니다. 기본적으로 HTTP GET요청을 보내고 서버의 응답에 따라 화면을 갱신합니다. 이러한 기본 로직을 막고 싶으면 이벤트 객체의 preventDefault 메소드를 호출하면 됩니다. 그리고 폼 요소의 method속성을 변경하고 submit메소드를 호출하면 변경된 메소드로 HTTP요청을 보낼 수 있습니다. HTTP GET요처을 보내게 되면 input 요소들의 name과 value 어트리뷰트 들을 조합하여 HTTP질의 문자열을 생성합니다. input 요소들의 name과 value 어트리뷰터 들을 조합하여 HTTPwlfdml answkdufdmf todtjdgkqslek. 
+        orderForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const {productName, color} = productField.elements;
+            console.log(
+                `${productName.value}상품 ${color.value}색을 주문합니다.`
+            )
+
+            orderForm.method = 'GET';
+            orderForm.submit();
+        })
+        //예제에서의 질의 문자열은 name=노예찬&tel=010-6610-3928&productName=담요&color=yellow입니다. 
+        //위 코드를 크롬 브라우저에서 열고 주문자 정보와 상품 정보를 입력한 후 하단의 button처리 버튼을 클릭하면 다음과 같이 콘솔에 주문자 정보가 출력됩니다. 그리고 submit제출 버튼을 클릭하면 브라우저 상단의 URL이 변경되는 것을 확인할 수 있습니다. 
+
+
+
+    </script>
+    
+</body>
+</html>
