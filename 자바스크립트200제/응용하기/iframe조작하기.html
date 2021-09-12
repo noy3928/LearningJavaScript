@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>iframe 바깥문서</h1>
+    <iframe src="./HTML폼활용하기.html" id="iframe1" width="100%" height="500px" frameborder="0"></iframe>
+
+    <script>
+        const iframe1 = document.getElementById('iframe1');
+
+        //내장된 문서의 로드가 끝나면 호출될 이벤트 리스너 함수를 등록합니다. 
+        iframe1.addEventListener('load', e => {
+            const iframeDocument = iframe1.contentDocument; // contentDocument을 통하여 내장된 문서의 독립된 documnet 객체에 접근합니다. 그 후 내장된 문서의 body요소의 백그라운드 색상을 파란색으로 변경합니다. 
+            iframeDocument.body.style.backgroundColor = 'blue';
+
+            const newEl = document.createElement('div');
+            newEl.innerHTML = '<h1>iframe 안쪽 문서';
+            newEl.style.color = 'white';
+            iframeDocument.body.appendChild(newEl)
+
+            setTimeout(() => {
+                //3후 내장된 문서를 도메인이 다른 문서로 변경합니다. 이때 만약 location을 google.com으로 변경하면 에러가 발생하는데 서버에서 응답하는 http헤더가 x-frame-options이 sameorigin으로 설정되어 있기 때문입니다. 
+                // x-frame-options을 통해 다른 페이지에 내장될 수 있는지를 정의할 수 있습니다. 
+                const iframeWindow = iframe1.contentWindow;
+                iframeWindow.location = 'https://google-analytics.com';
+            }, 3000)
+
+            //마지막에 에러가 발생하는 이유는 구글 애널리틱스 페이지 ㄹ드되고 다시 로드 이벤트가 발생하여 13라인에서 등록한 리스너 함수가 실행되는데 이때에는 contentDocument를 가져올 수 없습니다. 왜냐하면 동일 출처가 아니기 때문입니다. 
+            //동일 출처 정책에 부합하지 않으면 오직 로케이션 변경만 가능하고 그 외에 window객체 또는 document객체에 접근하여 수정하는 행위등은 할 수 없습니다. 
+            //현재 사이트의 주소가 http://js200.com이라면 다음은 모두 동일 출처 정책에 부합하지 않습니다. 
+            /* 
+            1) https://js200.com (다른 프로토콜)
+            2) http://js200.com:8080(다른 포트)
+            3) http://js200.org(다른 도메인) */
+        })
+    </script>
+
+</body>
+</html>
