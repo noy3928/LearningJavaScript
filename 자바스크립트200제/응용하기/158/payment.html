@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function submitForm() {
+            const form = document.getElementById('card-form');
+            //폼데이터는 XMLHttpRequest를 통해 서버에 데이터를 전달할 때 사용할 수 있습니다. 그리고 폼데이터를 폼요소로부터 생성하면 input요소의 name 어트리뷰트를 통해 value값을 가져올 수 있습니다. 
+            const formData = new FormData(form);
+            const formObj = {
+                cardNumber: formData.get('cardNumber'),
+                holderName: formData.get('holderName'),
+            }
+            //window의 parent갹체는 iframe 태그가 작성된 부모 window 객체를 가리킵니다. 그리고 postMessage는 메시지를 보낼 대상 window객체를 통해 호출해야 합니다. 그래서 부모 window객체의 postMessage를 호출해야 합니다. postMessage첫번째 인자는 전달할 메시지이고 두 번째 인자는 대상 window 객체의 출처를 작성합니다. 출처는 문자열 *별표 혹은 URI를 작성해야 하는데 *별표는 어떠한 출처도 가리지 않음을 의미합니다. 
+            window.parent.postMessage(formObj, '*');
+        }
+    </script>
+    <form id="card-form" onsubmit="submitForm()">
+        <div>
+            <label>카드번호</label>
+            <input type="text" name="cardNumber">
+        </div>
+        <div>
+            <label>이름</label>
+            <input type="text" name="holderName">
+        </div>
+        <button type="submit">결제하기</button>
+    </form>
+</body>
+</html>
