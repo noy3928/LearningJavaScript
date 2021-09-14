@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="user"></div>
+
+    <script>
+        //XMLHttpRequest객체를 사용하면 백그라운드로 서버와의 통신을 할 수 있습니다. 이 객체는 XML을 위한 httpRequest가 아니라 어떠한 형태의 데이터도 서버로부터 받거나 보낼 수 있습니다. 대표적인 예로 json메시지 포맷이 그러합니다. 
+
+        //이것을 비동기로 처리하는데 이 말은 서버로 요청을 보내고 받는 동안 이후의 자바스크립트 코드는 막히지 않고 계속 실행되고 클릭이나 사용자의 입력을 계속 처리할 수 있습니다. 
+
+
+        //XMLHttpRequest 함수를 생성할 함수를 정의합니다. httpGet함수는 이름에서 유추할 수 있듯이 HTTP의 GEt요청을 보내는 함수이고 url과 성공 그리고 실패 시 호출될 함수를 인자로 받습니다. 
+        function httpGet(url, successCallback, errorCallback){
+            const req = new XMLHttpRequest(); // 이 함수는 생성자 함수라서 new키워드를 통해 인스턴스를 생성합니다. 
+
+            //HTTP요청이 완료된면 호출 될 콜백 함수를 정의합니다. 요청이 완료되면 onldad에 연결된 함수를 호출하는데 이때 req 객체의 status는 HTTP상태 코드가 됩니다. 200이상이고 300미안이면 성공으로 간주하고 매개변수의 성공 콜백 함수에 응답을 전달하며 호출합니다. 그 외의 상태코드는 실패로 간주하고 상태 텍스트를 에러 메시지로 하여 에러와 함께 실패 콜백 함수를 호출합니다. 
+            req.onload = () => {
+                if(req.status >= 200 && req.status < 300) {
+                    successCallback(req.response);
+                }else{
+                    errorCallback(new Error(req.statusText))
+                }
+            }
+
+            req.onerror = errorCallback; // 요청을 시도하다 에러 발생 시 호출될 콜백 함수를 매개변수의 실패 콜백 함수로 정의합니다.
+            
+            //HTTP요청을 초기화합니다. 이때 HTTP메소드를 첫번째 인자로 전달하고 URL을 두번째 인자로 전달합니다. 부가적으로 3번째 인자로 비동기 여부를 불변 값으로 전달할 수 있습니다. 기본은 비동기로 전송합니다. 
+            req.open('GET', url); 
+
+            //HTTP요청의 헤더를 정의합니다. Accept헤더를 application/json으로 정의했습니다. Accept헤더는 요청하는 클라이언트가 받을 수 있는 데이터 타입을 정의합니다. 
+            req.setRequestHeader('Accept', 'application/json');
+
+            //이제 마지막으로 실제 요청을 보냅니다. post요청과 같이 http몸통을 같이 보내야할 때 문자열을 인자로 전달할 수 있습니다. 
+            req.send();
+        }
+
+        const userEl = document.getElementById('user');
+
+
+        //앞에서 정의한 함수를 호출합니다. 깃허브에 HTTP요청을 보냅니다. 요청이 성공하면 JSON메시지를 받고 해당 메시지를 객체화하여 만들어진 객체를 user에 할당합니다. 그리고 User객체의 속성을 이용하여 사용자 정보를 userEl내부에 추가합니다. 
+        httpGet('https://api.github.com/users/jeado', 
+        data => {
+            const user = JSON.parse(data);
+            userEl.innerHTML = `<img src="${user.avatar_url}"/><br>사용자이름 : ${user.login}, 깃헙주소: ${user.html_url}`
+        }, error => alert(error))
+    </script>
+</body>
+</html>
