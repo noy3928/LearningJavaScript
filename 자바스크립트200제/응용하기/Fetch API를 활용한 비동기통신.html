@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <div id="user"></div>
+        <script>
+            //깃헙의 jeado 사용자 정보를 가져오기 위해 fetch API를 사용하여 HTTP요청을 보냅니다. fetch API는 첫번째 인자로는 요청할 URL을 작성하고 다음으로 옵션 객체를 전달합니다. 옵션 객체에는 헤더와 HTTP메소드 등을 정의할 수 있습니다. 여기선 Accept 헤더를 application/json으로 하는 GET메소드 요청을 하도록 옵션을 정의했습니다. 
+            const userEl = document.getElementById('user');
+            const reqPromise = fetch('https://api.github.com/users/jeado22', {
+                headers: {Accept: 'application/json'},
+                method: 'GET'
+            });
+            //요청에 대한 응답이 왔을 때 호출되는 콜백 함수를 then메소드로 등록합니다. 콜백 함수는 응답 객체를 매개변수로 전달받는데 응답 객체를 이용하여 응답상태나 내용을 확인할 수 있습니다. 응답 객체의 status속성은 상태 코드를 반환합니다. 그리고 json메소드는 응답 본문을 json으로 파싱하여 처리된 결과를 promise로 반환합니다. 
+            reqPromise.then(res => {
+                if(res.status >= 200 && res.status < 300) {
+                    return res.json();
+                }else{
+                    return Promise.reject(new Error(`Got status ${res.status}`))
+                }
+            }).then(user => {
+                userEl.innerHTML = `<img src=${user.avatar_url}/><br> 사용자이름 : ${user.login}, 깃헙주소: ${user.html_url}`
+            }).catch(error => alert(error))
+        </script>
+</body>
+</html>
