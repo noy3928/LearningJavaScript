@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="number" id="number">
+        <button id="start-btn">피보나치수열 계산시작</button>
+    </div>
+    <div id="result"></div>
+    <script>
+        //웹워커는 무거운 작업의 스크립트를 백그라운드에서 동작할 수 있게 합니다. 작업을 수행하는 최소한의 단위를 스레드라고 하는데 사용자의 입력이나 화면의 렌더링 등을 다루는 메인 스레드를 방해하지 않고 별도의 스레드에서 스크립트를 실행하게 하는 것이 웹 워커입니다. 다음은 피보나치 수열을 계산하는 스크립트를 별도의 스레드에서 동작하도록 웨 워커를 사용하는 예제입니다. 
+
+        const result = document.getElementById('result');
+        let isCalculation = false;
+        if(window.Worker){
+            //웹 워커는 worker 생성자 함수를 통해 생성할 수 있습니다. 이때 실행할 자바스크립트 파일의 경로를 인자로 전달합니다. 
+            const fibonacciWorker = new Worker('fibonacci.js');
+
+            //시작 버튼을 클릭하면 id가 number인 input요소에 입력한 숫자값을 피보나치 워커에 postMessage를 이용하여 전달합니다. 메인 스크립트와 워커 스크립트 간의 메시지 전달은 이벤트 방식으로 동작해서 한쪽에서 postMessage메소드로 메시지를 전달하면 상대편의 onmessage에 등록된 콜백 함수를 통해 전달된 메시지를 받을 수 있습니다. 
+            document.getElementById('start-btn').addEventListener('click', e => {
+                if(isCalculation){
+                    return;
+                }
+                const value = document.getElementById('number').value;
+                fibonacciWorker.postMessage({num: value});
+                result.innerHTML = '계산 중 ...',
+                isCalculation = true;
+            });
+            //워커 스크립트에서 postMessage로 데이터를 전달하면 워커 인스턴스의 onmessage 속성에 등록한 콜백 함수가 호출됩니다. 콜백함수는 이벤트가 인자로 전다되는데 이벤트의 data를 통해 워커 스크립트에 전달한 메시지를 받을 수 있습니다. 여기서는 피보나치 수열의 계산된 결과가 data에 담겨있습니다. 
+            fibonacciWorker.onmessage = function(e) {
+                result.innerHTML = e.data;
+                isCalculation = false;
+            };
+
+            fibonacciWorker.onerror = function(error) {
+                cosole.error('에러 발생', error.message);
+                result.innerHTML = error.message;
+                isCalculation = false;
+            }
+        }
+    </script>
+</body>
+</html>
