@@ -37,3 +37,39 @@ var nodeArr = Array.prototype.slice.call(nodeList);
 nodeArr.forEach(function (node){
     console.log(node)
 })
+
+
+var str = 'abc def'
+
+Array.prototype.push.call(str, ', pushed string') // Error :  Cannot assign to read only property 'length' of object 
+
+Array.prototype.concat.call(str, 'string')
+
+Array.prototype.every.call(str, function(char){return char !== '';}) // false
+
+Array.prototype.some.call(str, function(char){return char === ''}) // true
+
+var newArr = Array.prototype.map.call(str, function(char){return char + '!'})
+
+console.log(newArr); // ['a!', 'b!', 'c!','!','d!','e!','f!']
+
+var newStr = Array.prototype.reduce.apply(str, [
+    function(string, char, i){
+        return string + char + i;
+    }, ''
+])
+
+console.log(newStr) // "a0b1c2 3d4e5f6"
+
+/* 유사배열객체 또는 순회 가능한 모든 종류의 데이터 타입을 배열로 전환하는 Array.from 메서드 */
+
+const obj = {
+    0: 'a',
+    1: 'b',
+    2: 'c',
+    length:3
+}
+
+const arr = Array.from(obj);
+console.log(arr) // ['a', 'b', 'c']
+
