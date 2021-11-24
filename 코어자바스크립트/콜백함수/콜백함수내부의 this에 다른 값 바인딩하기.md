@@ -40,4 +40,24 @@ setTimeout(callback3, 2000);
 </code>
 </pre>
 
-#### 다음 코드는 callback2 에서 obj2 의 func를 실행한 결과를 담아 이를 콜백으로 사용했다. callback3의 경우 obj1의 func를 실행하면서 this를 obj3가 되도록 지정해 이를 콜백으로 사용했습니다. 예제를 실행해보면 실행 시점으로부터 1.5초 후에는 'obj2'가, 실행 시점으로부터 2초 후에는 'obj3'이 출력됩니다. 
+#### 다음 코드는 callback2 에서 obj2 의 func를 실행한 결과를 담아 이를 콜백으로 사용했다. callback3의 경우 obj1의 func를 실행하면서 this를 obj3가 되도록 지정해 이를 콜백으로 사용했습니다. 예제를 실행해보면 실행 시점으로부터 1.5초 후에는 'obj2'가, 실행 시점으로부터 2초 후에는 'obj3'이 출력됩니다.
+
+
+#### 아래에서 보여주는 코드는 전통적인 방식을 보완하는 방법이다. es5 이후에 나온 bind 메서드를 활용하는 방법이다. 
+
+<pre>
+<code>
+var obj1 = {
+    name : 'obj1',
+    func: function(){
+        console.log(this.name)
+    }
+};
+setTimeout(obj1.func.bind(obj1),1000);
+
+var obj2 = {name: 'obj2};
+setTimeout(obj1.func.bind(obj2), 1500);
+</code>
+</pre>
+
+
