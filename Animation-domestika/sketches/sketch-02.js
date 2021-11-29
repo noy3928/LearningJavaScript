@@ -43,6 +43,14 @@ const sketch = () => {
       context.restore();
 
     }
+
+    context.translate(504, 490)
+    context.rotate(0.5)
+
+    context.beginPath()
+    context.rect(0,0,40,40);
+    context.fill()
+
   };
 };
 
