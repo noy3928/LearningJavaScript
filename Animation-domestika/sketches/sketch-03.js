@@ -36,7 +36,7 @@ class Point {
 class Agent {
   constructor(x, y) {
   this.pos = new Point(x, y);
-  this.radius = 10;
+  this.radius = random.range(4,12);
   }
 
   draw(context){
