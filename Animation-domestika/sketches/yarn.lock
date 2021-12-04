@@ -2,6 +2,39 @@
 # yarn lockfile v1
 
 
+"abs-svg-path@^0.1.1":
+  "integrity" "sha1-32Acjo0roQ1KdtYl4japo5wnI78="
+  "resolved" "https://registry.npmjs.org/abs-svg-path/-/abs-svg-path-0.1.1.tgz"
+  "version" "0.1.1"
+
+"adaptive-bezier-curve@^1.0.3":
+  "integrity" "sha1-R3V3q+h9coDUbKQWSfbCJkb+gic="
+  "resolved" "https://registry.npmjs.org/adaptive-bezier-curve/-/adaptive-bezier-curve-1.0.3.tgz"
+  "version" "1.0.3"
+
+"almost-equal@^1.1.0":
+  "integrity" "sha1-+FHGMROHV5lCdqou++jfowZszN0="
+  "resolved" "https://registry.npmjs.org/almost-equal/-/almost-equal-1.1.0.tgz"
+  "version" "1.1.0"
+
+"almost-equal@0.0.0":
+  "integrity" "sha1-56Wms0V7Z8g+4ARPmo0HY3NV8C0="
+  "resolved" "https://registry.npmjs.org/almost-equal/-/almost-equal-0.0.0.tgz"
+  "version" "0.0.0"
+
+"an-array@^1.0.0":
+  "integrity" "sha1-wSWlu4JXd4419LT2qpx9D6nkJmU="
+  "resolved" "https://registry.npmjs.org/an-array/-/an-array-1.0.0.tgz"
+  "version" "1.0.0"
+
+"array-almost-equal@^1.0.0":
+  "integrity" "sha1-Q8VP9DUELpy/pCEqxJraX8c1n8U="
+  "resolved" "https://registry.npmjs.org/array-almost-equal/-/array-almost-equal-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "almost-equal" "0.0.0"
+    "an-array" "^1.0.0"
+
 "call-bind@^1.0.2":
   "integrity" "sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA=="
   "resolved" "https://registry.npmjs.org/call-bind/-/call-bind-1.0.2.tgz"
@@ -9,6 +42,31 @@
   dependencies:
     "function-bind" "^1.1.1"
     "get-intrinsic" "^1.0.2"
+
+"canvas-sketch-util@^1.10.0":
+  "integrity" "sha512-IiJWEQDBinl6KZVLYcdp79ZJXXKsS1HuDUoWtwWh0NJMVUA6jaM0pxcBRYiaujBXjQFPT91pl8L9iFFmma3+zA=="
+  "resolved" "https://registry.npmjs.org/canvas-sketch-util/-/canvas-sketch-util-1.10.0.tgz"
+  "version" "1.10.0"
+  dependencies:
+    "abs-svg-path" "^0.1.1"
+    "almost-equal" "^1.1.0"
+    "array-almost-equal" "^1.0.0"
+    "clone" "^2.1.2"
+    "color-luminance" "^2.1.0"
+    "convert-length" "^1.0.1"
+    "d3-path" "^1.0.8"
+    "defined" "^1.0.0"
+    "float-hsl2rgb" "^1.0.2"
+    "float-rgb2hsl" "^1.0.1"
+    "lineclip" "^1.1.5"
+    "normalize-svg-path" "^1.0.1"
+    "parse-color" "^1.0.0"
+    "parse-svg-path" "^0.1.2"
+    "primitive-quad" "^2.0.0"
+    "regl" "^1.3.7"
+    "seed-random" "^2.2.0"
+    "simplex-noise" "^2.4.0"
+    "svg-path-contours" "^2.0.0"
 
 "canvas-sketch@^0.7.4":
   "integrity" "sha512-CSmzohS6PXFctDnPmNU0r4Mj9AGXsaOZciZv5Bh1Cb0lhIDaaAXsTkQKFrY1HzhUfNWwqoXUcjwcXAIWKdCxTA=="
@@ -26,12 +84,32 @@
     "pad-left" "^2.1.0"
     "right-now" "^1.0.0"
 
+"clone@^2.1.2":
+  "integrity" "sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18="
+  "resolved" "https://registry.npmjs.org/clone/-/clone-2.1.2.tgz"
+  "version" "2.1.2"
+
+"color-convert@~0.5.0":
+  "integrity" "sha1-vbbGnOZg+t/+CwAHzER+G59ygr0="
+  "resolved" "https://registry.npmjs.org/color-convert/-/color-convert-0.5.3.tgz"
+  "version" "0.5.3"
+
+"color-luminance@^2.1.0":
+  "integrity" "sha1-WP8uvTK1LQf1N47v5aDnnWsxitc="
+  "resolved" "https://registry.npmjs.org/color-luminance/-/color-luminance-2.1.0.tgz"
+  "version" "2.1.0"
+
 "convert-length@^1.0.1":
   "integrity" "sha512-w94Vge3sck6J1NHuA0du367/JTbj1zfjTapX7ixR2W+KlU4zb+NRTbou3x9nTpm5vlcXmjoaUJQpVN9pULCdxQ=="
   "resolved" "https://registry.npmjs.org/convert-length/-/convert-length-1.0.1.tgz"
   "version" "1.0.1"
   dependencies:
     "defined" "^1.0.0"
+
+"d3-path@^1.0.8":
+  "integrity" "sha512-VLaYcn81dtHVTjEHd8B+pbe9yHWpXKZUC87PzoFmsFrJqgFwDe/qxfp5MlfsfM1V5E/iVt0MmEbWQ7FVIXh/bg=="
+  "resolved" "https://registry.npmjs.org/d3-path/-/d3-path-1.0.9.tgz"
+  "version" "1.0.9"
 
 "dateformat@^3.0.3":
   "integrity" "sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q=="
@@ -61,6 +139,16 @@
   "integrity" "sha1-yY2bzvdWdBiOEQlpFRGZ45sfppM="
   "resolved" "https://registry.npmjs.org/defined/-/defined-1.0.0.tgz"
   "version" "1.0.0"
+
+"float-hsl2rgb@^1.0.2":
+  "integrity" "sha1-7PNQnECsZWfJaiBGIrDExL9DyKE="
+  "resolved" "https://registry.npmjs.org/float-hsl2rgb/-/float-hsl2rgb-1.0.2.tgz"
+  "version" "1.0.2"
+
+"float-rgb2hsl@^1.0.1":
+  "integrity" "sha1-jv6qD8cm5TNjp5vz9jYIIFXBDA4="
+  "resolved" "https://registry.npmjs.org/float-rgb2hsl/-/float-rgb2hsl-1.0.1.tgz"
+  "version" "1.0.1"
 
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
@@ -151,6 +239,23 @@
   "resolved" "https://registry.npmjs.org/is-window/-/is-window-1.0.2.tgz"
   "version" "1.0.2"
 
+"lineclip@^1.1.5":
+  "integrity" "sha1-K/JgZ9lDVP6r+R5CdoI221YW/RM="
+  "resolved" "https://registry.npmjs.org/lineclip/-/lineclip-1.1.5.tgz"
+  "version" "1.1.5"
+
+"normalize-svg-path@^0.1.0":
+  "integrity" "sha1-RWNg5g7Odfvve11+FgSA5//Rb+U="
+  "resolved" "https://registry.npmjs.org/normalize-svg-path/-/normalize-svg-path-0.1.0.tgz"
+  "version" "0.1.0"
+
+"normalize-svg-path@^1.0.1":
+  "integrity" "sha512-r9KHKG2UUeB5LoTouwDzBy2VxXlHsiM6fyLQvnJa0S5hrhzqElH/CH7TUGhT1fVvIYBIKf3OpY4YJ4CK+iaqHg=="
+  "resolved" "https://registry.npmjs.org/normalize-svg-path/-/normalize-svg-path-1.1.0.tgz"
+  "version" "1.1.0"
+  dependencies:
+    "svg-arc-to-cubic-bezier" "^3.0.0"
+
 "object-assign@^4.1.1":
   "integrity" "sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM="
   "resolved" "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz"
@@ -176,6 +281,23 @@
   dependencies:
     "repeat-string" "^1.5.4"
 
+"parse-color@^1.0.0":
+  "integrity" "sha1-e3SLlag/A/FqlPU15S1/PZRlhhk="
+  "resolved" "https://registry.npmjs.org/parse-color/-/parse-color-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "color-convert" "~0.5.0"
+
+"parse-svg-path@^0.1.2":
+  "integrity" "sha1-en7A0esG+lMlx9PgCbhZoJtdSes="
+  "resolved" "https://registry.npmjs.org/parse-svg-path/-/parse-svg-path-0.1.2.tgz"
+  "version" "0.1.2"
+
+"primitive-quad@^2.0.0":
+  "integrity" "sha1-wgmT5PlgAjiSa7UA5SkFMEPvius="
+  "resolved" "https://registry.npmjs.org/primitive-quad/-/primitive-quad-2.0.0.tgz"
+  "version" "2.0.0"
+
 "regexp.prototype.flags@^1.2.0":
   "integrity" "sha512-JiBdRBq91WlY7uRJ0ds7R+dU02i6LKi8r3BuQhNXn+kmeLN+EfHhfjqMRis1zJxnlu88hq/4dx0P2OP3APRTOA=="
   "resolved" "https://registry.npmjs.org/regexp.prototype.flags/-/regexp.prototype.flags-1.3.1.tgz"
@@ -183,6 +305,11 @@
   dependencies:
     "call-bind" "^1.0.2"
     "define-properties" "^1.1.3"
+
+"regl@^1.3.7":
+  "integrity" "sha512-bEAtp/qrtKucxXSJkD4ebopFZYP0q1+3Vb2WECWv/T8yQEgKxDxJ7ztO285tAMaYZVR6mM1GgI6CCn8FROtL1w=="
+  "resolved" "https://registry.npmjs.org/regl/-/regl-1.7.0.tgz"
+  "version" "1.7.0"
 
 "repeat-string@^1.5.4":
   "integrity" "sha1-jcrkcOHIirwtYA//Sndihtp15jc="
@@ -192,4 +319,34 @@
 "right-now@^1.0.0":
   "integrity" "sha1-bolgne69fc2vja7Mmuo5z1haCRg="
   "resolved" "https://registry.npmjs.org/right-now/-/right-now-1.0.0.tgz"
+  "version" "1.0.0"
+
+"seed-random@^2.2.0":
+  "integrity" "sha1-KpsZ4lCoFwmSMaW5mk2vgLf77VQ="
+  "resolved" "https://registry.npmjs.org/seed-random/-/seed-random-2.2.0.tgz"
+  "version" "2.2.0"
+
+"simplex-noise@^2.4.0":
+  "integrity" "sha512-OjyDWm/QZjVbMrPxDVi9b2as+SeNn9EBXlrWVRlFW+TSyWMSXouDryXkQN0vf5YP+QZKobrmkvx1eQYPLtuqfw=="
+  "resolved" "https://registry.npmjs.org/simplex-noise/-/simplex-noise-2.4.0.tgz"
+  "version" "2.4.0"
+
+"svg-arc-to-cubic-bezier@^3.0.0":
+  "integrity" "sha512-djbJ/vZKZO+gPoSDThGNpKDO+o+bAeA4XQKovvkNCqnIS2t+S4qnLAGQhyyrulhCFRl1WWzAp0wUDV8PpTVU3g=="
+  "resolved" "https://registry.npmjs.org/svg-arc-to-cubic-bezier/-/svg-arc-to-cubic-bezier-3.2.0.tgz"
+  "version" "3.2.0"
+
+"svg-path-contours@^2.0.0":
+  "integrity" "sha1-x2oSlCnbBette2Hk0cWNEUqJOKI="
+  "resolved" "https://registry.npmjs.org/svg-path-contours/-/svg-path-contours-2.0.0.tgz"
+  "version" "2.0.0"
+  dependencies:
+    "abs-svg-path" "^0.1.1"
+    "adaptive-bezier-curve" "^1.0.3"
+    "normalize-svg-path" "^0.1.0"
+    "vec2-copy" "^1.0.0"
+
+"vec2-copy@^1.0.0":
+  "integrity" "sha1-xu7B2NrVRiUZTl9x+EM7YtLyCno="
+  "resolved" "https://registry.npmjs.org/vec2-copy/-/vec2-copy-1.0.0.tgz"
   "version" "1.0.0"
