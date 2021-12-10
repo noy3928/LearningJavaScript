@@ -13,6 +13,8 @@ const params = {
   rows: 10,
   scaleMin: 1,
   scaleMax: 30,
+  freq: 0.001,
+  amp: 0.2,
 }
 
 const sketch = () => {
@@ -40,8 +42,12 @@ const sketch = () => {
       const w = cellw * 0.8;
       const h = cellh * 0.8;
 
-      const n = random.noise2D(x + frame * 10, y, 0.001);
-      const angle = n * Math.PI * 0.2;
+      // const n = random.noise2D(x + frame * 10, y, params.freq);
+      const n = random.noise3D(x + frame * 10, y, params.freq);
+
+
+
+      const angle = n * Math.PI * params.amp;
 
       // const scale = (n + 1) / 2 * 30;
       // const scale = (n * 0.5 + 0.5) * 30;
@@ -75,6 +81,9 @@ const createPane = () => {
   folder.addInput(params, 'scaleMin', {min: 1, max: 100});
   folder.addInput(params, 'scaleMax', {min: 1, max: 100});
 
+  folder = pane.addFolder({title: 'Noise'});
+  folder.addInput(params, 'freq', {min: -0.01, max: 0.01});
+  folder.addInput(params, 'amp', {min: 0, max: 1});
 }
 
 createPane();
