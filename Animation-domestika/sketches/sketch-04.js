@@ -1,19 +1,25 @@
 const canvasSketch = require('canvas-sketch');
 const random = require('canvas-sketch-util/random');
 const math = require('canvas-sketch-util/math');
+const Tweakpane = require('tweakpane')
 
 const settings = {
   dimensions: [ 1080, 1080 ],
   animate: true
 };
 
+const params = {
+  cols: 10,
+  rows: 10,
+}
+
 const sketch = () => {
   return ({ context, width, height, frame }) => {
     context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
 
-    const cols = 10;
-    const rows = 10;
+    const cols = params.cols;
+    const rows = params.rows;
     const numCells = cols * rows;
 
     const gridw = width * 0.8;
@@ -56,5 +62,17 @@ const sketch = () => {
     }
   };
 };
+
+const createPane = () => {
+  const pane = new Tweakpane.Pane();
+  let folder;
+
+  folder = pane.addFolder({ title :  'Grid'});
+  folder.addInput(params, 'cols', {min : 2, max: 50, step: 1});
+  folder.addInput(params, 'rows', {min : 2, max: 50, step: 1});
+}
+
+createPane();
+
 
 canvasSketch(sketch, settings);

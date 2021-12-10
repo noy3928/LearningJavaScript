@@ -346,6 +346,11 @@
     "normalize-svg-path" "^0.1.0"
     "vec2-copy" "^1.0.0"
 
+"tweakpane@^3.0.6":
+  "integrity" "sha512-LKl2Hau20bjslDQUB96GdNJLprwwEMkn/B/iN2XjWG+0iOvCBW4XiynTks+RUjU4bXhSI3VLBujKDIsuzDQg4g=="
+  "resolved" "https://registry.npmjs.org/tweakpane/-/tweakpane-3.0.6.tgz"
+  "version" "3.0.6"
+
 "vec2-copy@^1.0.0":
   "integrity" "sha1-xu7B2NrVRiUZTl9x+EM7YtLyCno="
   "resolved" "https://registry.npmjs.org/vec2-copy/-/vec2-copy-1.0.0.tgz"
