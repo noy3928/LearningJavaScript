@@ -1,3 +1,26 @@
-const name = 'yoshi';
+// const name = 'yoshi';
 
-console.log(name);
+// console.log(name);
+
+// const greet = (name) => {
+//     console.log(`hello, ${name}`);
+// }
+
+// greet('mario')
+// greet('yoshi')
+
+// console.log(global)
+
+// global.setTimeout(() => {
+//     console.log('in the timeout');
+//     clearInterval(int)
+// }, 3000);
+
+// const int = setInterval(() => {
+//     console.log('in the interval')
+// }, 1000)
+
+// console.log(__dirname);
+// console.log(__filename);
+
+console.log(document.querySelector);
