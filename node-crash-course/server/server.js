@@ -12,12 +12,15 @@ const server = http.createServer((req, res) => {
     switch(req.url){
         case '/':
             path += 'index.html';
+            res.statusCode = 200;
             break;
         case '/about':
             path += 'about.html';
+            res.statusCode = 200;
             break;
         default:
             path += '404.html';
+            res.statusCode = 404;
             break;
     }
 
@@ -28,6 +31,7 @@ const server = http.createServer((req, res) => {
             res.end()
         }else{
             // res.write(data);
+            
             res.end(data) //write에 쓰지않고, end에 써도 같은 답을 받을 수 있다. 
         }
     });
