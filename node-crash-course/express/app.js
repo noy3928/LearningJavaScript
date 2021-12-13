@@ -19,3 +19,11 @@ app.get('/about', (req, res) => {
 app.get('/about-us', (req, res) => {
     res.redirect('/about');
 })
+
+//404 page
+app.use((req, res) => {
+    //use에서는 매치되지 않는 url에 대해서 반응한다. 
+    res.sendFile('./views/404.html', {root: __dirname})
+})
+
+
