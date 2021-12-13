@@ -1,4 +1,5 @@
 const http = require('http');
+const fs = require('fs');
 
 const server = http.createServer((req, res) => {
     console.log('request made'); // 이것은 클라이언트 측에서는 나오지 않는다. 
@@ -7,9 +8,16 @@ const server = http.createServer((req, res) => {
     //set header content type, 브라우저에게 되돌려 줄 것을 정의하는 것. 
     res.setHeader('Content-Type', 'text/html');
 
-    res.write('<p>hello, ninjas</p>');
-    res.write('<p>hello <b>again</b>, ninjas</p>');
-    res.end();
+    //send an html file
+    fs.readFile('./views/index.html', (err, data) => {
+        if(err){
+            console.log(err)
+            res.end()
+        }else{
+            res.write(data);
+            res.end()
+        }
+    });
 });
 
 server.listen(3000, 'localhost', () => {
