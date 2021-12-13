@@ -8,14 +8,27 @@ const server = http.createServer((req, res) => {
     //set header content type, 브라우저에게 되돌려 줄 것을 정의하는 것. 
     res.setHeader('Content-Type', 'text/html');
 
+    let path = './views/';
+    switch(req.url){
+        case '/':
+            path += 'index.html';
+            break;
+        case '/about':
+            path += 'about.html';
+            break;
+        default:
+            path += '404.html';
+            break;
+    }
+
     //send an html file
-    fs.readFile('./views/index.html', (err, data) => {
+    fs.readFile(path, (err, data) => {
         if(err){
             console.log(err)
             res.end()
         }else{
-            res.write(data);
-            res.end()
+            // res.write(data);
+            res.end(data) //write에 쓰지않고, end에 써도 같은 답을 받을 수 있다. 
         }
     });
 });
