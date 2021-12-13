@@ -5,9 +5,10 @@ const server = http.createServer((req, res) => {
     console.log(req.url, req.method) // 리퀘스트 객체 받아보기. 여기서 url/에 추가된 내용을 우리는 받아볼 수 있을 것이다. 
 
     //set header content type, 브라우저에게 되돌려 줄 것을 정의하는 것. 
-    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Content-Type', 'text/html');
 
-    res.write('hello, ninjas');
+    res.write('<p>hello, ninjas</p>');
+    res.write('<p>hello <b>again</b>, ninjas</p>');
     res.end();
 });
 
