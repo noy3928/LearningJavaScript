@@ -26,12 +26,19 @@ app.use(morgan('dev'))
 //mongoose and mongo sandbox routes
 app.get('/add-blog', (req, res) => {
     const blog = new Blog({
-        title : 'new blog',
+        title : 'new blog 2',
         snippet: 'about my new blog',
         body: 'more about my new blog'
     });
 
+    //save는 promise를 반환한다. 
     blog.save()
+    .then((result) => {
+        res.send(result)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 })
 
 // app.use((req, res, next) => {
