@@ -4,7 +4,8 @@ const morgan = require('morgan')
 //exporess app
 const app = express()
 
-const dbURI = 'mongodb+srv://netninja:<password>@cluster0.ur9gc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+//connect to mongoDB
+const dbURI = 'mongodb+srv://netninja:qwe123@cluster0.ur9gc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 //register view engine
 app.set('view engine', 'ejs');
