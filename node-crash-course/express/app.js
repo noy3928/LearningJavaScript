@@ -7,14 +7,16 @@ const app = express()
 
 //connect to mongoDB
 const dbURI = 'mongodb+srv://netninja:qwe123@cluster0.ur9gc.mongodb.net/node-tuts?retryWrites=true&w=majority'
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+.then((result) => app.listen(3000))
+.catch((err) => console.log(err));
 
 //register view engine
 app.set('view engine', 'ejs');
 // app.set('views', 'myviews');
 
 // listen for requests
-app.listen(3000);
+
 
 //middleware & static files
 app.use(express.static('public'))
