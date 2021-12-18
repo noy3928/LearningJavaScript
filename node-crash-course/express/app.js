@@ -1,11 +1,13 @@
 const express = require('express')
 const morgan = require('morgan')
+const mongoose = require('mongoose')
 
 //exporess app
 const app = express()
 
 //connect to mongoDB
-const dbURI = 'mongodb+srv://netninja:qwe123@cluster0.ur9gc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const dbURI = 'mongodb+srv://netninja:qwe123@cluster0.ur9gc.mongodb.net/node-tuts?retryWrites=true&w=majority'
+mongoose.connect();
 
 //register view engine
 app.set('view engine', 'ejs');
