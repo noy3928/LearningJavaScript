@@ -79,7 +79,7 @@ app.get('/about', (req, res) => {
 
 // blog routes
 app.get('/blogs', (req, res) => {
-    Blog.find()
+    Blog.find().sort({ createAt: -1 })
         .then((result) => {
             res.render('index', {title : 'All Blogs', blogs: result })
         })
