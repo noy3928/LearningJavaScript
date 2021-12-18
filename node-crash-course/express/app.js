@@ -51,6 +51,16 @@ app.get('/all-blogs', (req, res) => {
         })
 })
 
+app.get('/single-blog',(req, res) => {
+    Blog.findById('61bd6575f44b6a23fa13e731')
+    .then((result) => {
+        res.send(result)
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+})
+
 // app.use((req, res, next) => {
 //     console.log('new request made:');
 //     console.log('host: ', req.hostname);
