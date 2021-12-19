@@ -1,6 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
+const Blog = require('./models/blog')
 
 // blog routes
 router.get('/blogs', (req, res) => {
@@ -51,3 +52,5 @@ router.delete('/blogs/:id', (req, res) => {
 router.get('/blogs/create', (req, res) => {
     res.render('create', {title: 'Create a new Blog'})
 })
+
+module.exports = router;
