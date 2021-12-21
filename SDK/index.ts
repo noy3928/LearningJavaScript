@@ -13,4 +13,15 @@ export function getPokemonById(id: number): Promise<object>{
     })
 }
 
-export default { getPokemonById };
+export function getPokemonTypeById(id: number): Promise<object> {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${API_URL}/type/${id}`)
+        .then((resp) => {
+          resolve(resp.data);
+        })
+        .catch(reject);
+    });
+  }
+
+export default { getPokemonById, getPokemonTypeById };
