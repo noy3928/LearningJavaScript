@@ -22,3 +22,26 @@ class Cat extends Dog{
 }
 
 const 고양이1 = new Cat('러시안블루', 'white', 2);
+
+
+
+// 게임형 유닛 만들어보기. 
+
+class Unit {
+    constructor(공격력 = 5, 체력 = 100) {
+        this.공격력 = 공격력
+        this.체력 = 체력
+    }
+
+    get battlePoint (){
+        return this.공격력 + this.체력
+    }
+
+    set heal(healPoint){
+        return this.체력 = this.체력 + healPoint
+    }
+}
+
+const sonic = new Unit();
+
+console.log(sonic.battlePoint)
