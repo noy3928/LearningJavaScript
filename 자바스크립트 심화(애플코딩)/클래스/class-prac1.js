@@ -44,4 +44,23 @@ class Unit {
 
 const sonic = new Unit();
 
-console.log(sonic.battlePoint)
+
+//-------------------
+
+const data = {
+    odd : [],
+    even : [],
+    separateNum(...nums){
+        nums.forEach((num) => {
+            if (num%2 == 0){
+                this.even.push(num)
+            }else{
+                this.odd.push(num)
+            }
+        })
+    },
+    showData(){
+        const allData = [...this.odd, ...this.even]
+        return allData.sort()
+    }
+}
