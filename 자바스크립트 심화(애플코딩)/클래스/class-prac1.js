@@ -3,6 +3,12 @@ class Dog {
         this.type = type;
         this.color = color;
     }
+
+    한살먹기(){
+        if(this instanceof Cat){
+            return this.age + 1
+        }
+    }
 }
 
 const 강아지1 = new Dog('똥개', 'black');
