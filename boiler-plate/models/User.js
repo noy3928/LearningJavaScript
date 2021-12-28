@@ -32,4 +32,6 @@ const userSchema = mongoose.Schema({
 //위에서 작성된 스키마를 모델로 감싸준다. 
 const User = mongoose.model('User', userSchema); // 첫번째 인자는 스키마의 이름, 두번째에는 스키마를 담아주기.
 
-module.exports = {}
+module.exports = {User}
+
+//서버에서 받을 때 필요한 것이 있다. body-parser가 그것이다.  
