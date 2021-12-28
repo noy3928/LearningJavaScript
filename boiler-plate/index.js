@@ -3,6 +3,8 @@ const app = express();
 const port = 3000; //포트는 아무거나 해도 상관없다. 
 const bodyParser = require('body-parser');
 
+const config = require('./config/key')
+
 const { User } = require('./models/User')
 
 //application/x-www-form-urlencoed <- 이렇게 된 부분을 해석해서 가져옴
@@ -12,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://noy3928:sdc03928@boilerplate.6rnsp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority').then(() => console.log('MongoDB Connected')).catch(err => console.log(err));
+mongoose.connect(config.mongoURI).then(() => console.log('MongoDB Connected')).catch(err => console.log(err));
 
 
 
