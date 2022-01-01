@@ -34,24 +34,36 @@ const userSchema = mongoose.Schema({
 //mongoose에서 가져온 메서드이다. save라는 인자를 넣어주면, 이 모델에 정보를 저장하기 전에, 무엇을 하겠다 라는 것이다. 만약 이게 다 끝나면, save라는 메서드가 실행된다는 것이다. 
 userSchema.pre('save', function(next){
     var user = this; // 아 this는 현재 userSchema를 가리킨다. 
-
-    //비밀번호를 암호화 시킨다. 
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-        if(err) return next(err);
-
-        //myPlaintextPassword(첫번째 인자)는 아직 암호화되지 않은 비밀번호. 
-        //두번째 인자는 함수의 인자를 그대로 넣어주기 
-        bcrypt.hash(user.password , salt, function(err, hash) {
-            if(err) return next(err)
-            user.password = hash //hash 된 비밀번호를 스키마에 넣어준다. 
-            // Store hash in your password DB.
-            next()
+    if(user.isModified('password')){
+        //비밀번호를 암호화 시킨다. 
+        bcrypt.genSalt(saltRounds, function(err, salt) {
+            if(err) return next(err);
+    
+            //myPlaintextPassword(첫번째 인자)는 아직 암호화되지 않은 비밀번호. 
+            //두번째 인자는 함수의 인자를 그대로 넣어주기 
+            bcrypt.hash(user.password , salt, function(err, hash) {
+                if(err) return next(err)
+                user.password = hash //hash 된 비밀번호를 스키마에 넣어준다. 
+                // Store hash in your password DB.
+                next()
+            });
         });
-    });
-
-    next()
-
+    } else {
+        // else 문을 넣어주지 않으면, 이 안에서 머물게 될 것이다. 
+        next()
+    }
 }) 
+
+userSchema.methods.comparePassword = function(plainPassword, cb){
+
+    //plainPassword가 123456 라고 가정하고 // 첫번째 인자와 두번째 인자를 비교하는 메서드 compare
+    bcrypt.compare(plainPassword, this.password, function(err, isMatch){
+        if(err) return cb(err),
+        
+        cb(null, isMatch)//에러는 없고, isMatch가 true이다. 라고 말하는 것. 
+    })
+
+}
 
 //위에서 작성된 스키마를 모델로 감싸준다. 
 const User = mongoose.model('User', userSchema); // 첫번째 인자는 스키마의 이름, 두번째에는 스키마를 담아주기.
