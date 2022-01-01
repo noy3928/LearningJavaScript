@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000; //포트는 아무거나 해도 상관없다. 
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 
 const config = require('./config/key')
 
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //json 화 된 파일을 해석해서 가져온다. 
 app.use(bodyParser.json());
+app.use(cookieParser())
 
 const mongoose = require('mongoose');
 mongoose.connect(config.mongoURI).then(() => console.log('MongoDB Connected')).catch(err => console.log(err));
@@ -57,15 +59,18 @@ app.post('/login', (req, res) => {
 
             // 비밀번호 까지 맞다면 토큰을 생성하기. 
             user.generateToken((err, user) => {
+                if(err) return res.status(400).send(err);
+
+                // 토큰을 저장한다. 어디에? 쿠키, 로컬스토리지, 세션스토리지. 
+                res.cookie('x_auth', user.token)
+                .status(200)
+                .json({ loginSuccess: true, userId: user._id })
 
             })
 
         })
 
     })
-
-
-
 
 })
 
