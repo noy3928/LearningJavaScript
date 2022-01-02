@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<h1>하이</h1>
+
+    
+<div class="preference">
+    <label for="cheese">Do you like cheese?</label>
+    <input type="file" name="cheese" id="cheese" />
+</div>
+
+
+<script>
+    const fileInput = document.querySelector('#cheess');
+    const reader = new FileReader();
+
+    function handleSelected(e) {
+        const selectedFile = fileInput.files[0];
+        if (selectedFile) {
+
+        reader.addEventListener('error', () => {
+            console.error(`Error occurred reading file: ${selectedFile.name}`);
+        });
+
+        reader.addEventListener('load', () => {
+            console.error(`File: ${selectedFile.name} read successfully`);
+        });
+
+        reader.readAsDataURL(selectedFile);
+    }
+}
+
+fileInput.addEventListener('change', handleSelected);
+</script>
+
+</body>
+</html>
