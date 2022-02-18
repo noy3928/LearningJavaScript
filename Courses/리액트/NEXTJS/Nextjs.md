@@ -1,9 +1,9 @@
 ## Link 태그 
-<br>
 whenever Link components appear in the browser’s viewport, 
 Next.js automatically prefetches the code for the linked page in the background. 
 By the time you click the link, the code for the destination page will already be loaded in the background, 
 and the page transition will be near-instant!
+<br>
 <br>
 링크 태그를 사용하면, 리액트처럼 클라이언트 사이드 렌더링이 이루어진다. 
 더군다나 공식 문서에 따르면, 서버사이드 렌더링에 의해서 페이지가 불러와져 있을 때, 
