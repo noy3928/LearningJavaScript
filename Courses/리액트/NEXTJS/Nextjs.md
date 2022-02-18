@@ -10,3 +10,15 @@ and the page transition will be near-instant!
 그 페이지 안에 Link 태그가 있다면 background 상에서 이미 해당 페이지를 load 해온다.
 때문에 Link를 통해서 페이지를 이동 했을 때는, 이미 해당 페이지가 load되어 있는 상태이기 때문에 상당히 빨리 이동할 수 있다. 
 넥스트.js는 알아갈 수록 매력적이라는 생각이 든다. 
+
+<br>
+
+## Image 태그 
+
+next.js는 기본적으로 이미지 최적화를 진행한다. 이 때 이미지 태그를 활용한다.   
+또한 이것은 유저가 해당 이미지를 요청할 때, 최적화를 진행하기 때문에, 
+정적 사이트와는 다르게, 빌드타임의 속도에 전혀 지장을 주지 않는다. 이미지가 10개든 10만개든 아무 상관이 없다. 
+기본적으로 Lazy Load가 적용되는 것이다. (대박!)
+
+[이미지 최적화](https://nextjs.org/docs/basic-features/image-optimization)
+
