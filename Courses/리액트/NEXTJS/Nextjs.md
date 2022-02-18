@@ -22,3 +22,9 @@ next.js는 기본적으로 이미지 최적화를 진행한다. 이 때 이미�
 
 [이미지 최적화](https://nextjs.org/docs/basic-features/image-optimization)
 
+<br>
+
+## Script 태그 
+
+head의 script 부분에 cdn을 넣을 수 있다. 하지만, 그렇게 하면 render-blocking으로 인해 성능상의 문제가 생길 수 있다. 
+이를 위해서 next.js는 Script태그를 지원한다. 
