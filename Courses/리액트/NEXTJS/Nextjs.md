@@ -84,5 +84,27 @@ Maybe your page shows frequently updated data, and the page content changes on e
 
 ### getStaticProps 에 대해서
 
-이 함수는 Next.js에게 다음과 같이 말한다. 
+- 이 함수는 Next.js에게 다음과 같이 말한다. 
 > “Hey, this page has some data dependencies — so when you pre-render this page at build time, make sure to resolve them first!”
+
+<br>
+
+- 이 함수는 서버사이드에만 존재한다. 그러니까, 브라우저에 실리는 js bundle에는 들어가지 않는 것이다. 
+ > This is possible because getStaticProps only runs on the server-side. <br> It will never run on the client-side. It won’t even be included in the JS bundle for the browser.  <br> That means you can write code such as direct database queries without them being sent to browsers.
+
+<br>
+
+- page 관련 파일 안에서만 사용할 수 있는 함수이다. 
+> getStaticProps can only be exported from a page. You can’t export it from non-page files. <br> One of the reasons for this restriction is that React needs to have all the required data before the page is rendered.
+
+
+<br>
+
+## Server Side Render 
+
+If you need to fetch data at request time instead of at build time, you can try Server-side Rendering:
+
+데이터 통신 관련한 조금 더 상새한 정보는 [여기](https://nextjs.org/docs/basic-features/data-fetching/overview)
+fetch나 axios를 사용할 때, [swr](https://swr.vercel.app/ko/docs/conditional-fetching)를 사용하면 더 좋다.
+
+
