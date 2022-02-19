@@ -29,3 +29,17 @@ next.js는 기본적으로 이미지 최적화를 진행한다. 이 때 이미�
 head의 script 부분에 cdn을 넣을 수 있다. 하지만, 그렇게 하면 render-blocking으로 인해 성능상의 문제가 생길 수 있다. 
 이를 위해서 next.js는 Script태그를 지원한다. 
 [스크립트](https://nextjs.org/docs/basic-features/script)
+
+<br>
+
+## Pre-rendering 
+
+<br>
+기본적으로 next.js는 모든 페이지를 pre-render한다. 이 말은 client-side에서 페이지를 렌더하지 않는다는 말이다. pre-rendering은 성능과 SEO측면에서 훨씬 낫다.   
+<br>
+그리고 이것을 통해서 자바스크립트 없이도, 페이지를 렌더링할 수 있다. 만약 당신이 순수 리액트만으로 페이지를 구현한다면, 자바스크립트 없이는 페이지를 로드할 수 없을 것이다.   
+
+![pre-rendering](./img/pre-rendering.png)
+
+![no pre-rendering](./img/no-pre-rendering.png)
+
