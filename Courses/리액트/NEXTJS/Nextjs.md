@@ -39,7 +39,14 @@ head의 script 부분에 cdn을 넣을 수 있다. 하지만, 그렇게 하면 r
 <br>
 그리고 이것을 통해서 자바스크립트 없이도, 페이지를 렌더링할 수 있다. 만약 당신이 순수 리액트만으로 페이지를 구현한다면, 자바스크립트 없이는 페이지를 로드할 수 없을 것이다.   
 
-![pre-rendering](./img/pre-rendering.png)
+<br>
 
-![no pre-rendering](./img/no-pre-rendering.png)
+![pre-rendering](./img/pre-rendering.png){: height="80"}
+
+<br>
+
+![no pre-rendering](./img/no-pre-rendering.png){: height="80"}
+<br>
+
+
 
