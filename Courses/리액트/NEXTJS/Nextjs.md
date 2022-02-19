@@ -40,12 +40,39 @@ head의 script 부분에 cdn을 넣을 수 있다. 하지만, 그렇게 하면 r
 그리고 이것을 통해서 자바스크립트 없이도, 페이지를 렌더링할 수 있다. 만약 당신이 순수 리액트만으로 페이지를 구현한다면, 자바스크립트 없이는 페이지를 로드할 수 없을 것이다.   
 
 <br>
-<img src="./img/pre-rendering.png" height="100" >
+
+<img src="./img/pre-rendering.png" height="250" >
 
 <br>
 
-<img src="./img/no-pre-rendering.png" height="100" >
+<img src="./img/no-pre-rendering.png" height="250" >
 <br>
 
 
+---
 
+## Pre-rendering의 2가지 방식 : Static Generation 과 Server-side Rendering 
+
+[Static Generation](https://nextjs.org/docs/basic-features/pages#static-generation-recommended) 은 빌드타임에 다 로드한다.  
+[Server-side Rendering](https://nextjs.org/docs/basic-features/pages#server-side-rendering) 은 매 request마다 로드한다.  
+
+<br>
+
+넥스트 js를 사용하면, 매 페이지마다 우리는 어떤 방식으로 로드할 지 결정할 수 있다. 
+
+<br>
+
+가능하면 Static Generation을 사용할 것을 추천!   
+We recommend using Static Generation (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request.
+
+<br>
+
+페이지를 작성할 때마다 다음과 같은 질문을 스스로에게 물어보기. 
+"Can I pre-render this page ahead of a user's request?"   
+If the answer is yes, then you should choose Static Generation.
+
+<br>
+
+Static을 사용하면 좋지 않은 경우 :  
+On the other hand, Static Generation is not a good idea if you cannot pre-render a page ahead of a user's request.  
+Maybe your page shows frequently updated data, and the page content changes on every request.
