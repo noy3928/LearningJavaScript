@@ -41,11 +41,11 @@ head의 script 부분에 cdn을 넣을 수 있다. 하지만, 그렇게 하면 r
 
 <br>
 
-![pre-rendering](./img/pre-rendering.png){: height="80"}
+![pre-rendering](./img/pre-rendering.png){: width="80" height="80"}
 
 <br>
 
-![no pre-rendering](./img/no-pre-rendering.png){: height="80"}
+![no pre-rendering](./img/no-pre-rendering.png){: width="80" height="80"}
 <br>
 
 
