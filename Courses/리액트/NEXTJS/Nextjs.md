@@ -49,8 +49,6 @@ head의 script 부분에 cdn을 넣을 수 있다. 하지만, 그렇게 하면 r
 <br>
 
 
----
-
 ## Pre-rendering의 2가지 방식 : Static Generation 과 Server-side Rendering 
 
 [Static Generation](https://nextjs.org/docs/basic-features/pages#static-generation-recommended) 은 빌드타임에 다 로드한다.  
@@ -68,7 +66,7 @@ We recommend using Static Generation (with and without data) whenever possible b
 <br>
 
 페이지를 작성할 때마다 다음과 같은 질문을 스스로에게 물어보기. 
-"Can I pre-render this page ahead of a user's request?"   
+"Can I pre-render this page ahead of a user's request?"     
 If the answer is yes, then you should choose Static Generation.
 
 <br>
@@ -76,3 +74,15 @@ If the answer is yes, then you should choose Static Generation.
 Static을 사용하면 좋지 않은 경우 :  
 On the other hand, Static Generation is not a good idea if you cannot pre-render a page ahead of a user's request.  
 Maybe your page shows frequently updated data, and the page content changes on every request.
+
+
+<br>
+
+## Static Generation 
+
+<br>
+
+### getStaticProps 에 대해서
+
+이 함수는 Next.js에게 다음과 같이 말한다. 
+> “Hey, this page has some data dependencies — so when you pre-render this page at build time, make sure to resolve them first!”
