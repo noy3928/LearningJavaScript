@@ -85,8 +85,10 @@ Maybe your page shows frequently updated data, and the page content changes on e
 ### getStaticProps 에 대해서
 
 - 이 함수는 Next.js에게 다음과 같이 말한다. 
-```sequence
+``` sequence
+
 getStaticProsps->Next.js: Hey, this page has some data dependencies — so when you pre-render this page at build time, make sure to resolve them first!
+
 ```
 
 <br>
