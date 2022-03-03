@@ -4,6 +4,8 @@
 import { jsx } from 'theme-ui'
 import Link from 'next/link'
 
+const url = process.env.HELP_APP_URL;
+
 const Nav = () => (
   <header sx={{height: '60px', width: '100vw', bg: 'primary', borderBottom: '1px solid', borderColor: 'primary'}}>
     <nav sx={{display: 'flex', alignItems: 'center',  justifyContent: 'space-between', variant: 'containers.page', height: '100%'}}>
@@ -19,7 +21,7 @@ const Nav = () => (
         fontSize: 3,
         cursor: 'pointer'
         }}
-        href={process.env.HELP_APP_URL}
+        href={url}
        >
         Help
       </a>

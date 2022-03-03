@@ -13,3 +13,10 @@ export default function Page () {
   </div>
   )
 }
+
+export function getStaticProps(context) {
+  console.log(context)
+  return {
+    props : {}
+}
+}
