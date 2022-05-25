@@ -35,7 +35,7 @@ const result = copyArrayAndMainipulate([1,2,3], multiplayBy2)
 </code>
 </pre>
 
-[executionContextOfHighOrderFunction](./Img/IMG_1165.jpg)
+![executionContextOfHighOrderFunction](./Img/IMG_1165.jpg "하이오더 함수의 실행 콘텍스트")
 
 <br>
 
