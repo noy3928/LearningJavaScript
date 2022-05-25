@@ -12,7 +12,7 @@
 
 # Functions
 
-The thread of execution : the ability to go through the code line-by-line and do it.
+The thread of execution : the ability to go through the code line-by-line and do it.  
 The memory : to store anything that shows up while we're inside that function.
 
 이런 코드의 실행와 메모리에 변수,함수 등이 저장되는 것을 일컫는 단어가 있다.  
