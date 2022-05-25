@@ -59,3 +59,7 @@ They can co-exist with and can be treated like any other javascript object.
 
 - Intricacy : 복잡한 사항
 - radiant : 빛나는
+
+<br>
+
+또한 이런 highorder function의 concept은 프로미스와 비동기 처리에서도 사용된다.

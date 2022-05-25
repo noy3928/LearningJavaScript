@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="./raphael.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var canvas = document.getElementById("canvas")
+        var paper = Raphael(canvas, 700, 400)
+
+        //원을 생성합니다.
+        var rect = paper.rect(0, 0, 700, 300)
+        var circle = paper.circle(350, 150, 100)
+
+        rect.attr("fill", "red")
+
+        circle.attr("fill", "orange")
+        circle.attr("stroke", "black")
+      })
+    </script>
+  </head>
+  <body>
+    <div id="canvas"></div>
+  </body>
+</html>
