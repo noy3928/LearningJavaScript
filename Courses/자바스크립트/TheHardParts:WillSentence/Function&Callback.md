@@ -59,7 +59,16 @@ They can co-exist with and can be treated like any other javascript object.
 
 - Intricacy : 복잡한 사항
 - radiant : 빛나는
-
-<br>
+  <br>
 
 또한 이런 highorder function의 concept은 프로미스와 비동기 처리에서도 사용된다.
+
+<br>
+<br>
+<br>
+
+## 새롭게 알게 된 단어 및 문장
+
+- endorse : 지지하다.
+- That is remarkable, it's gonna refine my technical communication beyond measure
+  - 그것은 놀라운 것입니다. 그것이 제 기술적인 커뮤니케이션을 엄청나게 다듬어 줄 겁니다.
