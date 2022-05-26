@@ -219,6 +219,67 @@ backpack은 자바스크립트 언어의 lexical scope의 특징 때문에 생�
 Backpack : the 'backpack' (ore 'closure') of live data is attached incrementCounter (then to myNewFunction) throught a hidden property known as [[scope]] which persists when the inner function is returned out.
 
 <br>
+
+# Multiple Closure Instance
+
+<pre>
+<code>
+function outer (){
+  let counter = 0;
+  function incrementCounter(){
+    counter++;
+  }
+  return incrementCounter;
+}
+
+const myNewFunction = outer();
+myNewFunction();
+myNewFunction();
+
+const anotherFunction = outer();
+anotherFunction()
+anotherFunction()
+</code>
+</pre>
+
+궁금한 것은 여기서 myNewFunction와 anotherFunction는 같은 backpack을 가질까?
+
+totally different backpacks.
+
+전적으로 다른 곳에서 생성된 backpack이다. Lexical variable environment;
+
+우리가 주목해볼 것은 counter변수를 어디서 생성했는지이다.
+만약 incrementCounter안에서 생성했다면,
+이 함수가 실행될 때마다 1이 출력되다가 끝날 것이다.
+
+closure의 인스턴스로 인해서 생성된 counter변수라면,
+1,2 그리고 1,2를 출력하다가 끝날 것이고,
+
+global memory에 생성된 counter 변수라면,
+1,2,3,4 가 출력될 것이다.
+
+이런 Lexical scope의 개념을 이해하는 것이,
+closure를 이해하는데에 아주 중요한 개념이 된다.
+
+### individual backpacks
+
+if we run 'outer' again and store the returned 'incrementCounter' function definition in 'anotherFunction',  
+this new incrementCounter function was created in a new execution context and therefore has a brand new independent backpack.
+
+<br>
+
+# Practical Applications
+
+## Closure gives our functions persistent memories and entirely new toolkit for writing professional code
+
+- Helper functions : Every professional helper functions like 'once' and 'memoize'
+- Iterators and generators : Which use lexical scoping and closure to achieve the most contemporary patterns for handling data in JavaScript
+  - 제네레이터에서 값을 실행할 때마다, 다른 값을 반환해줄 수 있었던 이유는 backpack이 있었기 때문이다.
+- Module pattern : Preserve state for the life of an application without polluting the global namespace
+- Asynchronous JavaScript : Callbacks and Promises rely on closure to persist state in an asychronous environment.
+  - 비동기 처리에서도 클로저가 이용되고 있었다니...! 비동기 함수가 실행되고 나면, 그 함수의 실행콘텍스트는 사라질 텐데, 어떻게 그 함수가 사용하고 있던 변수를 저장하고 있을까? 이런 질문의 해결점도 바로 클로저에 있다. 그 backpack. 놀라운 사실이다..!
+
+<br>
 <br>
 <br>
 
@@ -233,6 +294,8 @@ Backpack : the 'backpack' (ore 'closure') of live data is attached incrementCoun
 - look out : 주의하여 보다.
 - caveat : (특정 절차를 따르는) 통고
 - intercede : 간섭하다, 중재하다, 조정하다.
+- compartmentalised : 구획이 있는
+- lifespan : 수명
 
 강의에서 추천한 자료 : [https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8]
 

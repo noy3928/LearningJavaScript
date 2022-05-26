@@ -16,6 +16,8 @@ async function scrapeData() {
     const $ = cheerio.load(data)
     // Select all the list items in plainlist class
     const listItems = $(".plainlist ul li")
+    const test = $(".plainlist ul")
+    console.log(test.html())
     // Stores data for all countries
     const countries = []
     // Use .each method to loop through the li we selected
@@ -30,7 +32,7 @@ async function scrapeData() {
       countries.push(country)
     })
     // Logs countries array to the console
-    console.dir(countries)
+    // console.table(countries)
     // Write countries array in countries.json file
     fs.writeFile("coutries.json", JSON.stringify(countries, null, 2), err => {
       if (err) {
