@@ -145,6 +145,48 @@ It took with it all the surrounding data from where that function was saved, whe
 함수의 backpack에.
 
 <br>
+
+# Function Closure
+
+자 그러면 다시 돌아와서,  
+myNewFunction()의 실행콘텍스트로 돌아가보자.  
+counter를 ++해야하는데, local memory에는 없다.  
+그러면 어디를 쳐다볼까?  
+global? 아니. 이 함수의 backpack을 쳐다본다.
+그리고 그 backback안에 있는  
+counter에 +1을 해준다.
+
+자 그리고 한번 더 myNewFunction를 실행한다.
+그리고 그것에 대한 실행 콘텍스트가 생성된다.  
+그리고 또 counter를 ++하려고 하지만, local memory에는 없다.  
+그래서 backpack을 쳐다본다.  
+그리고 그곳에 저장된 counter 에 +1을 해서,  
+결국 counter == 2가 된다.
+
+**이 backpack의 기능이 자바스크립트의 most elegant feature이다.**
+
+<br>
+
+### 자, 어떻게 function은 그 주변에 있던 데이터를 함께 함수정의에 포함시킬 수 있었을까?
+
+아마 이런 종류의 함수를 console.log에 찍어보면,  
+[[scope]]라는 것이 출력되는 것을 본 적이 있을 것이다.  
+it is a hidden property that links to where all this surrounding data is stored. (increamentCounter 함수의 surrounding data)
+그래서 이제 이 함수가 반환될 때, 이 [[scope]]도 같이 반환된다.
+
+자, 그래서 우리가 myNewFunction를 실행하려고 했을 때,  
+그곳에서 사용되던 변수를 local memory에서 발견할 수 없으면,  
+global memory를 확인하기 이전에 [[scope]]가  
+intercede한다. "야! global 확인하기전에 나 먼저 확인해봐!"
+
+이 [[scope]]는 local memory처럼 temporary한 저장소가 아니다. permanent한 저장소다.
+이 저장소에는 아무나 접근할 수 없다. 오직 해당 function만 접근이 가능한 장소이다.
+
+그러면 이런 [[scope]]의 기능을 가지고 우리는 무엇을 할 수 있을까?  
+이것으 Permanent한 속성을 이용해서,
+다음번에 호출될 때, 그것을 기억하고 데이터의 조작을 제한할 수 있다.
+
+<br>
 <br>
 <br>
 
@@ -158,3 +200,4 @@ It took with it all the surrounding data from where that function was saved, whe
 - adjecent : 인접한, very near, next to, or touching
 - look out : 주의하여 보다.
 - caveat : (특정 절차를 따르는) 통고
+- intercede : 간섭하다, 중재하다, 조정하다.
