@@ -47,6 +47,44 @@ const result = generatedFunc(3) // 6
 </code>
 </pre>
 
+여기서 generatedFunc와 createFuncion의 관계를 설명해주는 문장.  
+It was result of createFunction.
+generatedFunc is only the result of the one time running of the createFunction.
+
+이제 generatedFunc 를 실행한다면,
+i'm running the function that was born as multiplyBy2().
+
+generatedFunc 와 createFuncion은 이제 어떠한 connection도 없다.
+
+자, 이제 이 generatedFunc를 실행하면 또 새로운 execution context가 실행되는 것이다.  
+근데 이 generatedFunc의 내용은 createFuncion에 있었는데,  
+그러면 자바스크립트는 createFuncion를 살펴볼까?
+전혀! 전혀 살펴보지 않는다. 그것은 우리 개발자의 입장에서 이해하기 위해서 살펴볼 뿐이고,  
+더 이상 컴퓨터상에서 generatedFunc의 내용이 createFuncion에 저장되어 있지 않으므로, 그것을 실행할 때, 참조하지 않는다.
+
+자, 그러면 이제 생각해볼 것은,  
+이런식으로 함수 내부에서 다른 함수를 반환해주는 것은 왜 하는 건가?  
+이것에 대한 이해를 가진다면,  
+자바스크립트의 여러가지 강력한 기능에 대해서 여러분들은 이해할 수 있게 될 것이다.
+
+<br>
+
+# Nested Function Scope
+
+<pre>
+<code>
+function outer(){
+  let counter = 0;
+  function incrementCounter (){
+    counter ++;
+  }
+  incrementCounter();
+}
+
+outer();
+</code>
+</pre>
+
 <br>
 <br>
 <br>
@@ -58,3 +96,4 @@ const result = generatedFunc(3) // 6
 - remembrance : 추모, 추도, 추억, 기념물
   - memory, recall, look back
 - folk : 여러분, 애들아(두 사람 이상의 사람들을 친근하게 부르는 말), 민속의, 전통적인, 민중의, 민간의
+- adjecent : 인접한, very near, next to, or touching:
