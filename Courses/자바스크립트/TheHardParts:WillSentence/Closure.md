@@ -187,6 +187,38 @@ intercede한다. "야! global 확인하기전에 나 먼저 확인해봐!"
 다음번에 호출될 때, 그것을 기억하고 데이터의 조작을 제한할 수 있다.
 
 <br>
+
+# Closure Technical Definition & Review
+
+자, 이제 backpack을 뭐라고 부르는지 알아보자. 그리고 다른 이름들도.
+
+먼저 local memory는 variable environment이다.
+그리고 그 backpack을 이렇게 부르는 사람이 있었다.  
+closed over variable environment.
+
+또 다른 이름도 있다.  
+이 backpack은 persist하고, data이고, reference되며, scope(what data available)
+
+모든 언어들마다 scope를 가지고 있는데, 자바스크립트는 굉장히 특별한 scope를 가지고 있다.  
+그것을 우리는 lexical scope or static scope라고 부른다.  
+이것은 이런 의미와 같다.
+what data it will have access to when that function runs.
+함수가 호출되는 곳의 환경을 보는 것을 우리는 dynamic scope라고 부르며, 함수가 선언된 곳의 환경을 바라보는 것을 lexical scope라고 부른다.
+
+이런 lexical scope의 특징을 가지고 있는 탓에,
+함수의 execution context가 사라져도,  
+그것의 환경을 가지고 함수의 backpack에 같이 저장한다.
+
+그래서 다시 이 backpack의 이름을 설명하자면,
+persistent lexical static scope reference data.  
+라고 부를 수 있다.  
+그래서 그냥 우리는 backpack이라고 부른다.
+
+backpack은 자바스크립트 언어의 lexical scope의 특징 때문에 생겨난 것이다.
+
+Backpack : the 'backpack' (ore 'closure') of live data is attached incrementCounter (then to myNewFunction) throught a hidden property known as [[scope]] which persists when the inner function is returned out.
+
+<br>
 <br>
 <br>
 
@@ -201,3 +233,7 @@ intercede한다. "야! global 확인하기전에 나 먼저 확인해봐!"
 - look out : 주의하여 보다.
 - caveat : (특정 절차를 따르는) 통고
 - intercede : 간섭하다, 중재하다, 조정하다.
+
+강의에서 추천한 자료 : [https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8]
+
+만약 헤밍웨이가 자바스크립트를 썼다면 => [https://nostarch.com/hemingway]
