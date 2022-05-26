@@ -71,6 +71,12 @@ generatedFunc 와 createFuncion은 이제 어떠한 connection도 없다.
 
 # Nested Function Scope
 
+클로저를 알아보기 이전에 마지막으로 알아볼 내용이다.
+
+<br>
+함수가 호출된 부분에서 정의된 함수가,  
+해당 블록에서 호출되는 경우.
+
 <pre>
 <code>
 function outer(){
@@ -85,6 +91,59 @@ outer();
 </code>
 </pre>
 
+이 안에서는 변수가 저장되고 있는데,  
+outer라는 함수가 호출되고있고,
+그 호출되는 함수에서 선언된 변수를  
+또 다시 그 안에서 호출된 함수가 사용하고 있다.
+
+이 변수와 함수들의 환경적인 이해관계를 살펴보도록 하자.
+이것을 명확하게 이해하게 된다면,  
+클로저를 이해하기 위한 근본을 이해했다고 말할 수 있다.
+
+<br>
+
+# Retaining Function Memory
+
+<pre>
+<code>
+function outer(){
+  let counter = 0;
+  function incrementCounter(){counter ++;}
+  return incrementCounter;
+}
+
+const myNewFunction = outer();
+myNewFunction();
+myNewFunction();
+</code>
+</pre>
+
+변수는 함수 바깥에 선언되었고, 이 변수를 함수 안쪽에서 참조중이다.  
+그런데 정작 함수 바깥으로 내보내진 것은 함수자체이다.  
+그러면 이 counter 변수는 어떻게 된 상태일까?
+
+1. 먼저는 myNewFunction이 선언되면서, 그곳에 outer함수가 호출된다. 그리고 호출과 동시에 실행 콘텍스트가 생성되면서, 그 안에서 counter 변수가 선언되고, incrementCounter 함수가 선언되고 반환된다.
+2. 자, 그리고 이 실행콘텍스트는 사라진다.
+3. 실행콘텍스트가 사라지면서 call stack에 있던, outer 함수도 같이 사라진다.
+4. 그리고 전역으로 돌아와서, myNewFunction()함수를 호출한다.
+5. call stack에 myNewFunction를 쌓는다.
+6. 새로운 실행콘텍스트가 생긴다.
+7. counter ++를 실행하려고 한다. 그래서 이 counter 변수가 local memory에 존재하는지 확인하려고 했지만, 그곳에는 counter 변수가 없다. 그러면 어떻게 한담?
+8. global memory를 쳐다본다. 그런데, global memory에 counter 변수가 있는가? 명확히 말하지만, 그곳에는 counter 변수가 없다. 재앙이다. 우째된걸까???
+
+<br>
+
+여기서 중요한 부분이 나온다.  
+우리가 incrementCounter라는 함수를 리턴할 때, 단순히 counter++만 리턴하지 않았다는 것이다.
+
+outer 실행콘텍스트가 가지고 있던 local memory도 함께, 저장된다.  
+어디에 저장된다는 것일까?
+
+It took with it all the surrounding data from where that function was saved, where it was born, where it was stored.
+
+그리고 그 데이터를 가지고, 반환된 함수의 background에 저장된다.  
+함수의 backpack에.
+
 <br>
 <br>
 <br>
@@ -96,4 +155,6 @@ outer();
 - remembrance : 추모, 추도, 추억, 기념물
   - memory, recall, look back
 - folk : 여러분, 애들아(두 사람 이상의 사람들을 친근하게 부르는 말), 민속의, 전통적인, 민중의, 민간의
-- adjecent : 인접한, very near, next to, or touching:
+- adjecent : 인접한, very near, next to, or touching
+- look out : 주의하여 보다.
+- caveat : (특정 절차를 따르는) 통고
