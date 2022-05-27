@@ -186,6 +186,17 @@ callback queue에 있던 함수들이 실제 call stack에 올라올 수 있는 
 2. global execution context has to be done.  
    이 말도 맞는 말이다. 만약에 무한대로 출력되는 console.log가 있다면, printHello는 절대로 callstack으로 넘어올 수 없을 것이다.
 
+그러면~!! 여기서 이런 작용들을 자바스크립트는 어떻게 수행하는가?  
+모든 global execution이 실행되고나서 callback queue에 있는 함수가 callstack에 올라가도록 하는 이 작업을 자바스크립트는 어떻게 수행하는가?
+
+이 기능은 이런식으로 말한다.
+
+- i'm gonna check before every single line of code run, is the call stack empty?
+- 만약 callstack이 비어있지 않다면, global 상에서 더 실행해야 할 함수는 없어??
+- 만약 그렇게 비어있지 않다면, 나는 callback queue를 쳐다보지 않을거야.
+
+이 기능의 이름은 Event Loop 이다.
+
 <br>
 <br>
 <br>
