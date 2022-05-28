@@ -106,6 +106,84 @@ value의 값을 인자로 가져와서 사용한다.
 
 270ms 에 'hi'라는 데이터가 출력될 것이다.
 
+### then method and functionality to call on completion
+
+Any code we want to run on the returned data must also be saved on the promise object  
+Added using .then method to the hidden property 'onFullfilment'
+Promise object will automatically trigger ther attached function to run (with its input being the returned data)
+
+<br>
+
+# Web API & Promises Example : fetch
+
+이제 우리가 마지막으로 살펴볼 코드다.  
+아마도 지금까지 살펴봤던 코드중에서 가장 복잡해보이는 코드일 것 같다.
+
+<pre>
+<code>
+function display(data){console.log(data)}
+function printHello(){console.log('Hello')}
+function blockFor300ms(){}
+
+setTimeout(printHello, 0);
+
+const futureData = fetch('https://twitter.com/will/tweets/1')
+futureData.then(display)
+
+blockFor300ms()
+console.log('Me First!')
+</code>
+</pre>
+
+- 내가 궁금한 것은 fetch에서 일어나는 일과  
+  callback queue는 어떤 관계가 있을까?
+
+- blockFor300ms에 있을 때, 만약 network에서 응답이 와서, promise 객체에 응답이 도착하면 어떻게 될까?
+
+- display 함수 그러니까, onFullfilment에 있는 함수는 실행될 때 callStack에 올라갈까? 아니 callstack에 올라가지 않는다.
+
+  - 이 함수는 callback queue에 올라가게 될 것이다.
+
+- 한번 더 중요한 포인트. console.log('Me First!!')까지 끝나고나면, 이제 event Loop는 callback queue가 실행될 준비가 끝났다고 판단한다. 그러면 바로 printHello를 실행할까? 아니다.
+  - 사실은 또 다른 하나의 큐가 더 존재한다. 일반적으로 callback queue는 task queue라고 불리는데, 또다른 microtask queue라는 것이 또 존재한다.
+  - 그리고 display이 함수는 microtask queue에 들어가있다. 이 함수는 270ms에 들어갔다고 우리는 전제를 했다.
+  - 결론적으로 event loop는 microtask queue에 있는 함수를 먼저 call stack에 올린다. 그래서 display에 callstack에 올라가고 그 인자 'hi'도 함께 올라갈 것이다.
+  - 이제 microtask queue가 비어있게 될 것이고, 그러면 이제 event loop는 task queue를 살펴보게 될 것이다. 그래서 printHello 함수를 call stack에 올리게 된다.
+
+기억해야할 것은 promise의 onFullfilment에 있는 함수는 그냥 callback에 들어가지 않는다.  
+micromask callback queue에 들어간다는 사실을 기억하자.
+
+그리고 event loop는 call stack이 비었다는 사실이 확인되면,  
+가장 먼저확인하는 callback queue는 microtask queue이다.
+
+이것이 이번 강의의 중요한 포인트이다.
+
+<br>
+
+# Promises Review
+
+우리가 이렇게 배웠던 내용들을 모를때의 단점 :
+
+- 99% of developers have no idea how they're working under the hood
+- Debugging becomes super-hard as a result
+- Developers fails technical interviews
+
+장점 :
+
+- Cleaner readable style with psedue-synchronous style code
+- Nice error handling process
+
+### we have rules for the execution of our asynchronously delayed code
+
+1. Hold promise-deferred functions in a microtask queue and callback function in a task queue(Callback queue)
+   when the Web Browser Feature(API) finishes.
+
+2. Add the function to the Call stack(i.e. run the function ) when :
+
+- Call stack is empty & all global code run (Have the Event Loop check this condition)
+
+3. Prioritize functions in the microtask queue over the Callback queue.
+
 <br>
 <br>
 <br>
@@ -116,3 +194,5 @@ value의 값을 인자로 가져와서 사용한다.
 - two pronged : 두 갈래의
 - myriad : 무수히 많음, 무수한
 - we want to put on for a while : 우리는 잠시 동안 입어보고 싶다.
+
+참고자료 : [https://www.youtube.com/watch?v=hIFkCrkkHMg]
