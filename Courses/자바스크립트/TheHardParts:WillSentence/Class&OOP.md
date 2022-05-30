@@ -293,6 +293,97 @@ arrow function이 저장된 곳의 Lexical environment가 this에 저장된다.
 <br>
 <br>
 
+<br>
+
+# new Keyword
+
+when we call the function that returns an object with new in front we automate 2 things
+1.Create a new user object
+2.Return the new user objcet
+
+But now we need to adjust how we write the body of userCreator - how can we :
+
+- Refer to the auto-created object?
+- Know where to put our single copies of functions?
+
+---
+
+자, 우리는 왜 new 키워드를 사용할까?
+이것은 굉장히 많은 것을 자동으로 해준다.
+이것은 자동으로 객체를 생성해줄 것이다.
+그리고 자동으로 객체를 반환해줄 것이다.
+그리고 **proto**에 연결될 함수에 자동으로 연결시켜줄 것이다.
+
+자, 그러면 만약에 이렇게 자동으로 객체가 생성된다면,
+그 객체의 식별자를 우리가 지정해줄 수 있을까? 아니. 그 식별자를 우리가 지정해줄 수는 없다.
+그러면 우리는 그 식별자를 어떻게 부를까? this로 부른다.
+
+this의 중요한 특징 중 하나이다. new 키워드를 통해서 인스턴스를 생성했다면,
+자동으로 객체가 생성됨과 동시에 그 객체의 식별자를 this로 binding한다.
+
+<pre>
+<code>
+function multiplyBy2(num){
+    ruturn num*2
+}
+
+multiplyBy2.stored = 5
+multiplyBy2(3) // 6
+
+multiplyBy2.stored //5
+multiplyBy2.prototype // {}
+
+//we could user the fact that all functions have a default property 'prototype' on their object version, 
+//(itself an object) - to replace our 'functionStore' object
+</code>
+</pre>
+
+코드가 실행되면 먼저는 메모리상에 multiplyBy2 함수가 생성된다.
+근데 이것은 함수임과 동시에 객체이다.
+2번째 줄로 넘어가면서 multiplyBy2의 객체에 stored라는 property가 생성되고,
+그 property에 5라는 값이 저장된다.  
+그리고 모든 객체 모든 함수는 prototype이라는 property를 가지고 있다.
+그리고 이것은 커다란 비어있는 객체이다.
+
+이 비어있는 커다란 객체에 new 키워드를 통해서 생성된 새로운 객체가 저장된다.
+코드를 통해서 자세하게 살펴보자.
+
+<pre>
+<code>
+function userCreator(name, score){
+    this.name = name;
+    this.score = score;
+}
+
+userCreator.prototype.increment = function(){this.score++;};
+userCreator.prototype.login = fucntion(){console.log('login')}
+
+const user1 = new userCreator('Eva', 9);
+
+user1.increment()
+</code>
+</pre>
+
+1.이것을 항상 기억하자. 우리는 함수를 생성할 때, 비어있는 객체를 하나 생성하는 것이라고.  
+2.사실 엄밀하게 말하면, 비어있는 객체는 아닌데,  
+prototype이라는 property를 가진 객체이다. 그리고 이 객체가 빈 객체를 가지고 있다.  
+3.그리고 우리는 다음 줄에서 이 빈 객체에 Increment라는 property를 생성한다.  
+4.다음에 우리는 login이라는 property를 생성한다.  
+5.user1을 생성한다.  
+6.new userCreator를 호출한다. 함수를 호출하지만, new 키워드와 함께 호출한다.  
+7.새로운 execution context가 생성된다.  
+8.local memory에 name : eve, score : 9를 생성한다.  
+9.new키워드가 있기 때문에 새로운 빈 객체가 생성된다. 그리고 이 빈 객체에 접근하려면 우리는 this를 사용하면 된다.  
+10.다음으로 이 빈객체에 있는 **proto**는 userCreator의 prototype의 객체를 참조한다.  
+11.이 모든 것들은 new키워드로 인해 자동으로 실행되는 것이다.  
+12.이 this 객체에 우리가 선언했던, name과 score 값을 property로 할당한다.  
+13.returning this 객체.  
+14.user1에 this 객체를 반환한다.
+
+increment와 login 함수를 이런 방식으로 할당함으로써,  
+memory 관리를 탁월하게 할 수 있게 되었다.  
+하나의 저장소에 저장해놓고, 호출할 때마다 이 저장소를 참조하도록 만든 것이다.
+
 ## 새롭게 알게된 단어 및 문장 :
 
 - emulation : 1.경젱, 겨룸, 대항 2.에물레이션(다른 컴퓨터의 기계어 명령대로 실행할 수 있는 기능)
@@ -300,3 +391,4 @@ arrow function이 저장된 곳의 Lexical environment가 this에 저장된다.
 - untenable : 방어될 수 없는, 옹호될 수 없는
 - redundant : 불필요한, 쓸모없는
 - intimate : 친밀한
+- interlude : 사이
