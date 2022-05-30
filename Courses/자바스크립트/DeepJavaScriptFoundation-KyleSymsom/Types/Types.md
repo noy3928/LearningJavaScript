@@ -25,6 +25,14 @@ primitive type의 목록
  
  # typeof Operator
 
+- undefined : initialized되었지만, 아직 값은 가지지 않고 있는 상태.
+  - 명확한 의미는 dose not currently have a value.
+  - 굳이 이렇게 말한 이유는 값을 가졌다가도 다시 undefined 상태로 돌아갈 수 있기 때문이다.
+
+<br>
+
+# BigInt
+
 <br>
 <br>
 <br>
@@ -32,3 +40,5 @@ primitive type의 목록
 ## 새롭게 알게 된 단어 및 문장 :
 
 - caveat : 통고
+- plausible : 그럴듯한, 수긍할 수 있는
+- ergonomically : 인체공학적으로
