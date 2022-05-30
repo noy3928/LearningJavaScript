@@ -388,6 +388,57 @@ memory 관리를 탁월하게 할 수 있게 되었다.
 
 # class keyword
 
+우리는 위에서 본 함수의 내부에서 this 키워드를 사용하고 있기 때문에 new 키워드를 사용해야한다는 사실을 알 수 있다.  
+그런데 이런 사실은 그 함수의 내부를 살펴보지 않는 이상 알 수 없는 것이다.  
+이런 방식의 디자인은 그렇게 smart하지 않은 방식이다.  
+그래서 사람들이 사용했던 일시적인 방법은 이런 생성자 함수, 그러니까 new 키워드를 사용해야 정상작동하는 함수의 경우에는  
+함수명의 첫번째 글자를 대문자로 표기했다.
+
+이런 상황 속에서 나오게 된 것이 바로, class이다.
+
+### the class 'syntactic sugar'
+
+sugar는 겉으로 보이는 모습만 바뀌었을 뿐이지, 그 내부적인 사항은 크게 변화가 없는 것을 말한다.  
+이 class에 대해서 조금 더 알아보자.
+
+- we're writing our shared methods separately from our object 'constructor' itself(off in the userCreator.prototype object)
+- other languages let us do this all in one place.
+
+<pre>
+<code>
+class UserCreator{
+    // 이 constructor 부분이 우리가 위에서 정의했던 userCreator 함수 부분이라고 볼 수 있다. 
+    constructor(name, score){
+        this.name = name;
+        this.score = score;
+    }
+    
+    //이렇게 메서드를 생성하는 부분이 우리가 위에서 userCreator.prototype.increment와 같은 방식으로 주입했던 것과 같다고 볼 수 있다. 
+    increment(){this.score++;}
+    login(){console.log("login")}
+}
+
+const user1 = new UserCreator("Eva", 9);
+user1.increment();
+</code>
+</pre>
+
+내부 동작방식에 있어서는 다를 것이 전혀 없는 모습이라고 볼 수 있다.  
+그렇지 않는가??
+겉모습은 다른 언어와 비슷해졌지만, 사실상 내부는 그언어들과는 다르다.  
+그렇지만 우리가 아까 이해했던 function을 통한 생성자를 생성하는 방법과는 내부적으로 완전히 똑같다.  
+겉으로는 더 읽기 쉬워졌지만, 내부적으로는 똑같은 상황.
+
+이런 class 키워드를 사용하는 것의 유익 :
+
+- emerging as a new standard
+- Feels more like style of other languages
+
+문제점 :
+
+- 99% of developers have no idea how it works and therethore fail interviews.
+- But you will not be one of them!.
+
 ## 새롭게 알게된 단어 및 문장 :
 
 - emulation : 1.경젱, 겨룸, 대항 2.에물레이션(다른 컴퓨터의 기계어 명령대로 실행할 수 있는 기능)
