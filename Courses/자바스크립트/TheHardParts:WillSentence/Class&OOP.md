@@ -203,6 +203,93 @@ object.prototype에 접근한다. hasOwnProperty가 있나?
 기존적으로 Null의 값이 저장되어있다.
 
 <br>
+
+# this Keyword
+
+<pre>
+<code>
+function userCreator(name, score){
+    const newUser = Object.create(userFunctionStore);
+    newUser.name = name;
+    newUSer.score = score;
+    return newUser;
+}
+
+const userFunctionStore = {
+    increment : function(){
+        function add1(){
+            this.score++;
+        }
+        add1();
+    },
+}
+
+const user1 = userCreator('Will', 3);
+const user2 = userCreator('Tim', 5);
+user1.increment();
+</code>
+</pre>
+
+- 메서드를 호출해서 생성되는 실행콘텍스트에서는 this가 Local memory에 저장되고, .왼쪽편에 있는 변수의 값이 저장된다.
+
+- 해당 변수 안에 있는 function add1안에 있는 this는 어디를 가리킬까?
+  - global memory를 쳐다본다. 그런데 거기에는 Score가 없기 때문에 Undefined가 나온다.
+
+## Arrow function Style
+
+when we use arrow function style, it's this assingment is automatically lexically scoped.
+that's to say, when we save the function, when we execute it, what this is set to is determined by
+where the function was saved.
+so if it was saved where this is user1, when we end up running it,
+this inside will be this value from where the function was saved, which is user1.
+
+예시 코드를 보자.
+
+<pre>
+<code>
+function userCreator(name, score){
+    const newUser = Object.create(userFunctionStore);
+    newUser.name = name;
+    newUSer.score = score;
+    return newUser;
+}
+
+const userFunctionStore = {
+    increment : function(){
+        const add1  = () = > {
+            this.score++;
+        }
+        add1();
+    },
+}
+
+const user1 = userCreator('Will', 3);
+const user2 = userCreator('Tim', 5);
+user1.increment();
+</code>
+</pre>
+
+user1은 global에 저장되어있고,
+increment는 user1에 없으니 **proto**를 통해서,
+userFunctionStore를 확인하고,
+그곳이 있으니 그것을 사용한다.
+그래서 그 메소드가 실행되면서, execution context가 실행되고,
+그곳의 Local memory에는 가장 먼저 Implicit parameter인 this가 저장된다.
+그리고 this의 값으로는 User1이 저장된다.
+그리고 add1이라는 변수에 arrow function style로 함수가 저장된다.
+우리는 즉시 add1를 실행한다.
+
+add1의 execution context가 실행되고,
+local memory에 값들을 저장할 것이다.
+(만약 호출한 함수에 .이 있다면 그 왼쪽편에 있는 변수를 this에 할당하지만, 그렇지 않은 방식으로 호출한 함수는 global을 가리키게 된다.)
+그렇지만 지금 우리는 arrow function을 선언한 상황이다.
+this에는 뭐가 저장되어 있을까?  
+user1이 저장될 것이다.
+
+arrow function이 저장된 곳의 Lexical environment가 this에 저장된다.
+결론적으로 이제 this.score++는 user1.score++ 가 될 것이다.
+
+<br>
 <br>
 <br>
 
