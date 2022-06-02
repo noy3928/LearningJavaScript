@@ -80,6 +80,44 @@ Number.isNaN("my son's age"); //false
 - NaN is number. it's just an invalid number.
 
 <br>
+
+# Negative Zero
+
+- Q : 근데 나는 이 부분 강의를 들으면서 도대체 -0은 언제 쓰이는 것일지가 궁금했다. 내가 이것을 쓸 일이 있을까?
+
+- Object.is라는 메서드를 사용하기
+
+<br>
+
+# Fundamental Object
+
+만약 아래와 같은 목록의 fundamental Object를 이용하고 싶다면,
+
+- Object
+- Array
+- Function
+- Data
+- RegExp
+- Error
+
+new 키워드를 사용하자.
+
+아래의 목록에서는 New 키워드를 사용하지 말 것.
+
+- String
+- Number
+- Boolean
+
+<pre>
+<code>
+var yesterday = new Data("March 6, 2019");
+yesterday.toUTCString();
+
+var myGPA = String(transcript.gpa)
+</code>
+</pre>
+
+<br>
 <br>
 <br>
 
@@ -89,4 +127,5 @@ Number.isNaN("my son's age"); //false
 - plausible : 그럴듯한, 수긍할 수 있는
 - ergonomically : 인체공학적으로
 - sentinel : 감시병
-- perplexingly : 보
+- perplexingly : 복잡성의
+- retrospect : 회상, 회고, 추억, 회구
