@@ -32,3 +32,22 @@ Traceroute is how many hops does it take to get to the server, are you alive?
 > 홉 hop
 >
 > > 홉은 컴퓨터 네트워크에서 출발지와 목적지 사이에 위치한 경로의 한 부분이다. 데이터 패킷은 브리지, 라우터, 게이트웨이를 거치면서 출발지에서 목적지로 경유한다.
+
+<br>
+
+# Packet
+
+it's the smallest bit of information you can transmit.
+envelop.
+there is addres.
+where you coming from.
+
+- on the internet is just billions, and trilliions, and trillions of packets are moving right now.
+
+- key information is meta data.
+
+  - where it' going
+  - where it came from
+  - all these metadata attached to it.
+
+- packet is not a just one.
