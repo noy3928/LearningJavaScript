@@ -5,8 +5,7 @@ const cheerio = require("cheerio")
 const pretty = require("pretty")
 const fs = require("fs")
 
-const url =
-  "https://www.youtube.com/watch?v=h_XDmyz--0w&list=PLuHgQVnccGMCgrP_9HL3dAcvdt8qOZxjW"
+const url = "https://www.youtube.com/"
 
 async function scrapeData() {
   try {
@@ -14,8 +13,8 @@ async function scrapeData() {
     const { data } = await axios.get(url)
     // Load HTML we fetched in the previous line
     const $ = cheerio.load(data)
-    const list = $("#items", "#container")
-    console.log(list.html())
+    const list = $("#guide-inner-content")
+    console.log(pretty($.html()))
     const items = []
 
     // Select all the list items in plainlist class
