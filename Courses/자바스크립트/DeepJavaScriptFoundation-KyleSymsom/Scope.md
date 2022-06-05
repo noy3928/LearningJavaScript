@@ -38,6 +38,29 @@ sorting marble은 자바스크립트가 실행되기 전에 일어난다.
 - JavaScript organizes scopes with functions and blocks
 
 <br>
+
+# Compliation & Scope
+
+<pre>
+<code>
+var teacher = 'kyle' // Red
+
+function otherClass(){ // Red 
+    var teacher = 'suzy'; // Blue
+    console.log('welcome');
+}
+
+function ask(){ // Red
+    var question = 'why?' // Blue
+    console.log(question);
+}
+
+otherClass();
+ask();
+</code>
+</pre>
+
+<br>
 <br>
 <br>
 
