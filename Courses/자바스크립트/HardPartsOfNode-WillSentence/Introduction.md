@@ -38,3 +38,15 @@ C++. 대표적으로 이 언어가 접근가능하다.
 - C++ has many features that let it directly interact with the OS directly
 - Javascript does not! so it has to work with C++ to control these computer features. what it this combination known as? ... node.js!!
 - js -> node -> computer feature.
+
+<br>
+
+# JavaScript, Node & The Computer
+
+## Rewind. we had better understand javascript to understand Node.js then
+
+It's a language that does 3 things (and 1 involves a lot of help from c++).
+
+1. Saves data and functionality
+2. Uses that data by running functionality on it
+3. Has a ton of built-on labels that trigger Node features that are built-in C++ to use our computer's internal
