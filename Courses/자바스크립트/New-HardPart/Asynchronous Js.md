@@ -73,6 +73,10 @@ printHello는 지금 callbackQueue에 들어가있다.
 callstack이 비어있을 때, 그때 올라갈 수 있다.  
 그런 비어있음을 확인하는 것이 이벤트루프이다.
 
+- 아 콜백큐는 브라우저의 기능인가? 아니다. 이것은 자바스크립트의 엔진이다.
+- web browser feature에서 on completion이 되면, callback큐의 뒤에 들어간다.
+- 이벤트루프도 자바스크립트의 엔진이다.
+
 <br>
 <br>
 <br>
