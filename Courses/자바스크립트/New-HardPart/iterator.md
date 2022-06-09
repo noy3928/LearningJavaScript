@@ -103,6 +103,25 @@ global을 내다볼 것이 아니라, inner함수의 backpack을 확인해야했
 아까 우리가 저장했던 값이 persist되고 있기 때문이다.
 
 <br>
+
+# Iterator Function
+
+## The bond
+
+- When the function inner is defined, it gets a bond to the surrounding local memory in which it has been defined.
+- when we return out inner, that surrounding live data is returned out too - attached on the 'back' of the function definition itself(which we now give a new global label returnNextElement)
+- when we call returnNextElement and don't find array or i in the immediate execution context, we look into the function definition's backpack' of persistent live data
+- The 'backpack'is officially known as the C.O.V.E or 'closure'
+
+## So iterators turn our data into 'streams' of actual values we can access one after another.
+
+Now we have functions that holds our underlying array, the position we're curretly at in the array, and return out the next item in the 'stream' of elements from our array when run.
+
+This lets us have for loops that show us the element itself in the body on each loop and more deeply allows us to rethink arrays as flows of elements themselves which we can interact with by calling a function that switches that flow on to give us our next element.
+
+We have truly 'decoupled' the process of accessing each element from what we want to do to each element
+
+<br>
 <br>
 <br>
 
