@@ -71,3 +71,38 @@ const el2 = returnNextElement.next()
 
 - yield는 곧장 실행 콘텍스트로부터 벗어나게 만든다.그래서 newNum = yield num 에서 오른쪽 부분에서 곧장 밖으로 나가 return한다. 이 때문에 newNum에는 당장에는 값이 할당되지 않는다.
 - 그리고 우리는 next(2)이렇게 2의 값을 넣어주었다. 이 2 값을 가지고 실행콘텍스트를 시작한다. 이 값은 아까 yield문에서 끝났던 곧의 value로 들어간다. 이 value는 이제서야 newNum에 담긴다. 그래서 newNum == 7이 된다.
+
+### And most importantly, for the first time we get to pause ('suspend') a function being run and then return to it by calling returnNextElement.next()
+
+In asynchronous js we want to
+
+1. initiate a task that takes a long time
+2. Move on to more synchronous regular code in the meantime
+3. Run some functionality once the requested data has come back
+
+what if we were to yield out of the function at the moment of sending off the long-time task and return to the function only when the task is complete
+
+<br>
+
+# Async Generators
+
+### we can use the ability to pause createFlow's running and then restart it only when our data returns
+
+<pre>
+<code>
+function doWhenDataReceived(value){
+    returnNextElement.next(value)
+}
+
+function *createFlow(){
+    const data = yield fetch('http://twitter.com/tweet')
+    console.log(data)
+}
+const returnNextElement = createFlow()
+const futureData = returnNextElement.next()
+
+futureData.then(doWhenDataReceived)
+</code>
+</pre>
+
+we get to control when we return back to createFlow and continue executing by setting up the trigger to do so (returnNextElement.next()) to be run by our function that was triggered by the promise resolution (when the value returned from twitter)
