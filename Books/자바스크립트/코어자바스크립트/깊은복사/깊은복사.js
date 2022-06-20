@@ -39,7 +39,6 @@ const copyObjectDeep2 = target => {
   } else {
     result = target
   }
-  return result
 }
 
 const obj3 = copyObjectDeep2(obj)
@@ -67,3 +66,34 @@ const obj4 = copyObjectDeep3(obj)
 const obj5 = copyShallow(obj)
 
 console.log(obj5.b.e)
+
+//--------------4 배열을 고려한 복사
+
+const checkType = target => {
+  if (Array.isArray(target) && target !== null) return "Array"
+  else if (typeof target === "object" && target !== null) return "Object"
+  else return false
+}
+
+const copyObjectDeep4 = target => {
+  if (checkType(target) == "Array") {
+    let result = []
+    for (var prop in target) {
+      result.push(copyObjectDeep4(target[prop]))
+    }
+    return result
+  }
+  if (checkType(target) == "Object") {
+    var result = {}
+    for (var prop in target) {
+      result[prop] = copyObjectDeep4(target[prop])
+    }
+    return result
+  } else {
+    return target
+  }
+}
+
+exports.copyObjectDeep = copyObjectDeep
+exports.copyObjectDeep3 = copyObjectDeep3
+exports.copyObjectDeep4 = copyObjectDeep4
