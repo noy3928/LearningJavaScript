@@ -97,3 +97,9 @@ const copyObjectDeep4 = target => {
 exports.copyObjectDeep = copyObjectDeep
 exports.copyObjectDeep3 = copyObjectDeep3
 exports.copyObjectDeep4 = copyObjectDeep4
+
+/*
+먼저, 깊은 복사가 불가능한 타입들이 꽤 많습니다. 
+함수(functions), Date 객체, 정규표현식, Infinity 등등의 데이터는 
+복사되지 않고 유실되고 맙니다.
+*/
