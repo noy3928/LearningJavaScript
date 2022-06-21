@@ -23,51 +23,7 @@ var obj = {
 
 var obj2 = copyObjectDeep(obj)
 
-//----------------2 check 부분 분리하기
-
-const checkObj = target => {
-  if (typeof target === "object" && target !== null) return true
-  else return false
-}
-
-const copyObjectDeep2 = target => {
-  var result = {}
-  if (checkObj(target)) {
-    for (var prop in target) {
-      result[prop] = copyObjectDeep2(target[prop])
-    }
-  } else {
-    result = target
-  }
-}
-
-const obj3 = copyObjectDeep2(obj)
-console.log(obj3)
-
-//----------3 object.assign으로 만들어보기
-
-const copyShallow = target => {
-  return Object.assign({}, target)
-}
-
-const copyObjectDeep3 = target => {
-  var result = {}
-  if (checkObj(target)) {
-    for (var prop in target) {
-      result[prop] = copyObjectDeep3(target[prop])
-    }
-  } else {
-    return copyShallow(target)
-  }
-  return result
-}
-
-const obj4 = copyObjectDeep3(obj)
-const obj5 = copyShallow(obj)
-
-console.log(obj5.b.e)
-
-//--------------4 배열을 고려한 복사
+//--------------2 배열을 고려한 복사
 
 const checkType = target => {
   if (Array.isArray(target) && target !== null) return "Array"
@@ -75,18 +31,18 @@ const checkType = target => {
   else return false
 }
 
-const copyObjectDeep4 = target => {
+const copyObjectDeep2 = target => {
   if (checkType(target) == "Array") {
     let result = []
     for (var prop in target) {
-      result.push(copyObjectDeep4(target[prop]))
+      result.push(copyObjectDeep2(target[prop]))
     }
     return result
   }
   if (checkType(target) == "Object") {
     var result = {}
     for (var prop in target) {
-      result[prop] = copyObjectDeep4(target[prop])
+      result[prop] = copyObjectDeep2(target[prop])
     }
     return result
   } else {
@@ -94,9 +50,15 @@ const copyObjectDeep4 = target => {
   }
 }
 
+//---------- stringify 복사
+
+function stringifyClone(target) {
+  return JSON.parse(JSON.stringify(target))
+}
+
 exports.copyObjectDeep = copyObjectDeep
-exports.copyObjectDeep3 = copyObjectDeep3
-exports.copyObjectDeep4 = copyObjectDeep4
+exports.copyObjectDeep2 = copyObjectDeep2
+exports.stringifyClone = stringifyClone
 
 /*
 먼저, 깊은 복사가 불가능한 타입들이 꽤 많습니다. 
