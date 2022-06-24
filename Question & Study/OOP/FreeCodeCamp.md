@@ -231,3 +231,145 @@ Bird.prototype = {
 };
 </code>
 </pre>
+
+<br>
+
+## Remember to Set the Constructor Property when Changing the Prototype
+
+<pre>
+<code>
+function Dog(name) {
+  this.name = name;
+}
+
+// Only change code below this line
+Dog.prototype = {
+  constructor : Dog,
+  numLegs: 4,
+  eat: function() {
+    console.log("nom nom nom");
+  },
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
+</code>
+</pre>
+
+<br>
+
+## Understand Where an Object’s Prototype Comes From
+
+사람들이 그들의 부모에게 유전자를 물려받듯이, 객체도 만들어진 생성자함수로부터 prototype을 직접 물려받는다.  
+예를들어, 여기 Bird 생성자가 duck 객체를 만들었다.
+
+<pre>
+<code>
+function Bird(name) {
+  this.name = name;
+}
+
+let duck = new Bird("Donald");
+</code>
+</pre>
+
+duck은 Bird 생성자 함수로부터 이것의 prototype을 상속한다. 이것의 관계는 isPrototypeOf 메서드를 통해서 보여줄 수 있다.
+
+<pre>
+<code>
+Bird.prototype.isPrototypeOf(duck); // true
+</code>
+</pre>
+
+<br>
+
+## Understand the Prototype Chain
+
+All objects in JavaScript (with a few exceptions) have a prototype
+
+<pre>
+<code>
+function Bird(name) {
+  this.name = name;
+}
+
+typeof Bird.prototype;
+</code>
+</pre>
+
+prototype이 하나의 객체이기 때문에, prototype은 그 자체로 prototype을 가질 수 있다.  
+Bird.prototype의 prototype은 Object.prototype이다.
+
+<pre>
+<code>
+Object.prototype.isPrototypeOf(Bird.prototype); //true
+</code> 
+</pre>
+
+이거는 어디에 쓸모가 있을까?? hasOwnProperty를 기억할텐데,
+
+<pre>
+<code>
+let duck = new Bird("Donald");
+duck.hasOwnProperty("name");
+</code>
+</pre>
+
+hasOwnProperty 이 메서드는 Bird.prototype로도 접근가능하고,duck으로도 접근가능한 Object.prototype로부터 결정되어 진다.  
+이게 바로 프로토타입체인의 예시이다. 이런 프로토타입 체인에서, Bird는 duck의 supertype이고, duck은 subtype이다.  
+Object는 Bird와 duck의 supertype이다. Object는 자바스크립트에 존재하는 모든 객체의 supertype이라고 할 수 있다.  
+그러므로 모든 객체들은 hasOwnProperty 메서드를 사용할 수 있다.
+
+<br>
+
+## Use Inheritance So You Don't Repeat Yourself
+
+There's a principle in programming called Don't Repeat Yourself (DRY)  
+Notice in the example below that the describe method is shared by Bird and Dog:
+
+<pre>
+<code>
+Bird.prototype = {
+  constructor: Bird,
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
+
+Dog.prototype = {
+  constructor: Dog,
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
+</code>
+</pre>
+
+describe가 반복되고 있다. Animal이라는 supertype을 만들어서 DRY원칙을 지킬 수 있을 것 같다.
+
+<pre>
+<code>
+function Animal() { };
+
+Animal.prototype = {
+  constructor: Animal, 
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
+</code>
+</pre>
+
+Since Animal includes the describe method, you can remove it from Bird and Dog:
+
+<pre>
+<code>
+Bird.prototype = {
+  constructor: Bird
+};
+
+Dog.prototype = {
+  constructor: Dog
+};
+</code>
+</pre>
