@@ -13,16 +13,12 @@ describe("cloneDeep", () => {
       g: new Function(),
       h: new Date(),
       k: new Set([1, 2, 3, 4, { a: 1, b: 2 }]),
-      l: [1, 2, 3, 4, { a: 1, b: 2 }].map((v, i) => {
-        const map = new Map()
-        return map.set(i, v)
-      }),
+      l: new Map(),
       i: new RegExp(),
       j: Symbol("a"),
       m: 42 / +0,
     },
   }
-
   function compareObject(target1, target2) {
     const isObject =
       typeof target1 === "object" &&
@@ -44,31 +40,11 @@ describe("cloneDeep", () => {
     compareObject(obj, copyObjectDeep(obj))
   })
 
-  it("should have different reference - lodash", () => {
-    compareObject(obj, _.cloneDeep(obj))
-  })
-
   it("should have reference equality - toEqual", () => {
     expect(copyObjectDeep(obj)).toEqual(obj)
   })
 
-  // it("reference equality - toEqual", () => {
-  //   expect(copyObjectDeep(obj)).toEqual(obj)
-  // })
-
-  // it("reference equality - toStrictEqual", () => {
-  //   expect(copyObjectDeep(obj)).toStrictEqual(obj)
-  // })
-
-  // it("lodash clone deep test", () => {
-  //   expect(_.cloneDeep(obj)).toStrictEqual(obj)
-  // })
-
-  // it("stringifyClone복사 참조 값이 같은가?", () => {
-  //   expect(stringifyClone(obj)).toBe(obj)
-  // })
-
-  // it("stringifyClone복사 내용물이 같은가?", () => {
-  //   expect(stringifyClone(obj)).toEqual(obj)
-  // })
+  it("should have different reference - lodash", () => {
+    compareObject(obj, _.cloneDeep(obj))
+  })
 })
