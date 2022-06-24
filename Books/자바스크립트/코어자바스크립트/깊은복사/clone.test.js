@@ -1,5 +1,4 @@
-const { copyObjectDeep, copyObjectDeep2 } = require("./깊은복사")
-// const { compareObject } = require("./compareObj")
+const { copyObjectDeep } = require("./deepCopy")
 const _ = require("lodash")
 
 describe("cloneDeep", () => {
@@ -13,13 +12,14 @@ describe("cloneDeep", () => {
       },
       g: new Function(),
       h: new Date(),
+      k: new Set([1, 2, 3, 4, { a: 1, b: 2 }]),
+      l: [1, 2, 3, 4, { a: 1, b: 2 }].map((v, i) => {
+        const map = new Map()
+        return map.set(i, v)
+      }),
       i: new RegExp(),
       j: Symbol("a"),
-      k: new Set([1, 2, 3, 4, { a: 1, b: 2 }]),
-      l: new Map(),
       m: 42 / +0,
-      // n: new WeakSet(),
-      // o: new WeakMap(),
     },
   }
 
@@ -48,9 +48,9 @@ describe("cloneDeep", () => {
     compareObject(obj, _.cloneDeep(obj))
   })
 
-  // it("reference equality - toEqual2", () => {
-  //   expect(copyObjectDeep2(obj)).toEqual(obj)
-  // })
+  it("should have reference equality - toEqual", () => {
+    expect(copyObjectDeep(obj)).toEqual(obj)
+  })
 
   // it("reference equality - toEqual", () => {
   //   expect(copyObjectDeep(obj)).toEqual(obj)

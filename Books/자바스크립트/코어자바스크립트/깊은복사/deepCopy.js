@@ -5,14 +5,6 @@ function getTag(value) {
   return toString.call(value)
 }
 
-function cloneObject(target) {
-  var result = {}
-  for (var prop in target) {
-    result[prop] = copyObjectDeep(target[prop])
-  }
-  return result
-}
-
 const objTag = "[object Object]"
 const arrTag = "[object Array]"
 const dateTag = "[object Date]"
@@ -58,51 +50,44 @@ const copyObjectDeep = target => {
 
   if (tag === arrTag) {
     let result = []
-    for (const prop in target) {
-      result.push(copyObjectDeep(target[prop]))
+    for (const prop of target) {
+      result.push(copyObjectDeep(prop))
     }
     return result
   }
 
   if (tag === dateTag) {
-    let date = new Date()
-    let copiedDate = new Date(date.getTime())
-    return copiedDate
+    let date = target.constructor
+    return new date(+target)
+  }
+
+  if (tag === setTag) {
+    let copiedSet = new Set()
+    for (const prop of target) {
+      copiedSet.add(copyObjectDeep(prop))
+    }
+    return copiedSet
+  }
+
+  if (tag === mapTag) {
+    let copiedMap = new Map()
+    for (const [key, value] of target) {
+      copiedMap.set(key, copyObjectDeep(value))
+    }
+    return copiedMap
   }
 
   if (tag === regexpTag) {
-    let date = new Date()
-    let copiedDate = new Date(date.getTime())
-    return copiedDate
+    const reFlags = /\w*$/
+    const copiedRegExp = new target.constructor(
+      target.source,
+      reFlags.exec(target)
+    )
+    copiedRegExp.lastIndex = target.lastIndex
+    return copiedRegExp
   }
 
   return target
 }
 
-const checkType = target => {
-  if (Array.isArray(target) && target !== null) return "Array"
-  else if (typeof target === "object" && target !== null) return "Object"
-  else return false
-}
-
-const copyObjectDeep2 = target => {
-  if (checkType(target) == "Array") {
-    let result = []
-    for (var prop in target) {
-      result.push(copyObjectDeep2(target[prop]))
-    }
-    return result
-  }
-  if (checkType(target) == "Object") {
-    var result = {}
-    for (var prop in target) {
-      result[prop] = copyObjectDeep2(target[prop])
-    }
-    return result
-  } else {
-    return target
-  }
-}
-
 exports.copyObjectDeep = copyObjectDeep
-exports.copyObjectDeep2 = copyObjectDeep2
