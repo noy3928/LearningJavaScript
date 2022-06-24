@@ -5,7 +5,15 @@ const mapTag = "[object Map]"
 const regexpTag = "[object RegExp]"
 const setTag = "[object Set]"
 
-function initClone(tag, target, recursiveFunc) {
+function getTag(value) {
+  if (value == null) {
+    return value === undefined ? "[object Undefined]" : "[object Null]"
+  }
+  return toString.call(value)
+}
+
+function initClone(target, recursiveFunc) {
+  const tag = getTag(taget)
   switch (tag) {
     case objTag:
       return cloneObject(target, recursiveFunc)
