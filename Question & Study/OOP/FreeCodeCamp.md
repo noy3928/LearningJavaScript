@@ -373,3 +373,24 @@ Dog.prototype = {
 };
 </code>
 </pre>
+
+<br>
+
+## Inherit Behaviors from a Supertype
+
+인스턴스를 만드는 또 다른 방법
+
+<pre>
+<code>
+let animal = Object.create(Animal.prototype);
+</code>
+</pre>
+
+By setting the prototype of animal to be the prototype of Animal, you are effectively giving the animal instance the same "recipe" as any other instance of Animal.
+
+<pre>
+<code>
+animal.eat();
+animal instanceof Animal;
+</code>
+</pre>
