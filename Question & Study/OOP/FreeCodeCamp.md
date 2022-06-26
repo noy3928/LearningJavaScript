@@ -394,3 +394,49 @@ animal.eat();
 animal instanceof Animal;
 </code>
 </pre>
+
+<br>
+
+## Set the Child's Prototype to an Instance of the Parent
+
+This challenge covers the next step: set the prototype of the subtype (or child)—in this case, Bird—to be an instance of Animal.
+
+<pre>
+<code>
+Bird.prototype = Object.create(Animal.prototype);
+</code>
+</pre>
+
+prototype은 객체를 만들기 위한 레시피와 같다는 것을 기억하자. Bird를 위한 레시피는 지금 Animal로 부터 받은 모든 핵심 재료들을 가지고 있다.
+
+<pre>
+<code>
+let duck = new Bird('Donald');
+duck.eat();
+</code>
+</pre>
+
+duck은 Animal의 속성을 상속받음으로써, eat 메서드를 가지고 있다.
+
+<br>
+
+## Reset an Inherited Constructor Property
+
+<pre>
+<code>
+function Bird() { }
+Bird.prototype = Object.create(Animal.prototype);
+let duck = new Bird();
+duck.constructor
+</code>
+</pre>
+
+But duck and all instances of Bird should show that they were constructed by Bird and not Animal.  
+To do so, you can manually set the constructor property of Bird to the Bird object:
+
+<pre>
+<code>
+Bird.prototype.constructor = Bird;
+duck.constructor
+</code>
+</pre>
