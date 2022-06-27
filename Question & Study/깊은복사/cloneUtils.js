@@ -13,7 +13,7 @@ function getTag(value) {
 }
 
 function initClone(target, recursiveFunc) {
-  const tag = getTag(taget)
+  const tag = getTag(target)
   switch (tag) {
     case objTag:
       return cloneObject(target, recursiveFunc)

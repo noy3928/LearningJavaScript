@@ -40,11 +40,11 @@ describe("cloneDeep", () => {
     compareObject(obj, copyObjectDeep(obj))
   })
 
-  it("should have reference equality - toEqual", () => {
-    expect(copyObjectDeep(obj)).toEqual(obj)
-  })
-
   it("should have different reference - lodash", () => {
     compareObject(obj, _.cloneDeep(obj))
+  })
+
+  it("should have value equality in object - toEqual", () => {
+    expect(copyObjectDeep(obj)).toEqual(obj)
   })
 })

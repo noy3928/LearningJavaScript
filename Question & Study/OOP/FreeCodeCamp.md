@@ -431,8 +431,8 @@ duck.constructor
 </code>
 </pre>
 
-But duck and all instances of Bird should show that they were constructed by Bird and not Animal.  
-To do so, you can manually set the constructor property of Bird to the Bird object:
+하지만 duck 이나, Bird로부터 만들어진 instance들은 그들이 Bird로 부터 만들어졌지,Animal로 만들어진 것이 아니라는 것을 보여줄 필요가 있다.  
+이것을 하기 위해서, Bird의 constructor property를 Bird object에 수동적으로 세팅할 수 있다.
 
 <pre>
 <code>
@@ -440,3 +440,74 @@ Bird.prototype.constructor = Bird;
 duck.constructor
 </code>
 </pre>
+
+<br>
+
+## Add Methods After Inheritance
+
+부모 생성자 함수의 prototype 객체를 상속한 생성자함수는 상속받은 메서드에 더해서, 본래 자신의 메서드도 여전히 가지고 있다.
+예를 들어서, Bird는 생성자함수이다. Animal의 prototype을 상속한
+
+<pre>
+<code>
+function Animal() { }
+Animal.prototype.eat = function() {
+  console.log("nom nom nom");
+};
+function Bird() { }
+Bird.prototype = Object.create(Animal.prototype);
+Bird.prototype.constructor = Bird;
+</code>
+</pre>
+
+Animal에게서 상속받은것 외에도, Bird 객체에 유니크한 행동을 넣으려 한다.  
+fly 함수를 얻게되었다. 함수는 Bird의 prototype에 추가된다, 다른 모든 생성자함수와 같은 방식으로.
+
+<pre>
+<code>
+Bird.prototype.fly = function() {
+  console.log("I'm flying!");
+};
+</code>
+</pre>
+
+이제 Bird는 eat과 fly 두 개의 메서드를 가지게 되었다.
+
+<pre>
+<code>
+let duck = new Bird();
+duck.eat();
+duck.fly();
+</code>
+</pre>
+
+<br>
+
+## Override Inherited Methods
+
+메서드를 오버라이딩하는 것도 가능하다. 자식 프로토타입에 같은 이름으로 넣어주면 된다.
+
+<pre>
+<code>
+function Animal() { }
+Animal.prototype.eat = function() {
+  return "nom nom nom";
+};
+function Bird() { }
+
+Bird.prototype = Object.create(Animal.prototype);
+
+Bird.prototype.eat = function() {
+  return "peck peck peck";
+};
+</code>
+</pre>
+
+만약 let duck = new Bird(); 이런 인스턴스가 있다면,  
+duck.eat()를 호출할 수 있다.  
+이게 자바스크립트가 duck의 프로토타입 체인으로 메서드를 찾는 방법이다.
+
+1.duck => Is eat() defined here? No.  
+2.Bird => Is eat() defined here? => Yes. Execute it and stop searching.  
+3.Animal => eat() is also defined, but JavaScript stopped searching before reaching this level.  
+4.Object => JavaScript stopped searching before reaching this level.
