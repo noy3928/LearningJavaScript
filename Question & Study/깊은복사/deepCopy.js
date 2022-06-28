@@ -1,7 +1,7 @@
-const { initClone } = require("./cloneUtils")
+const { cloneByTag } = require("./cloneUtils")
 
-const copyObjectDeep = target => {
-  return initClone(target, copyObjectDeep)
+const cloneObjectDeep = target => {
+  return cloneByTag(target, cloneObjectDeep)
 }
 
-exports.copyObjectDeep = copyObjectDeep
+exports.cloneObjectDeep = cloneObjectDeep

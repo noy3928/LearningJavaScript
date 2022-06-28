@@ -511,3 +511,148 @@ duck.eat()를 호출할 수 있다.
 2.Bird => Is eat() defined here? => Yes. Execute it and stop searching.  
 3.Animal => eat() is also defined, but JavaScript stopped searching before reaching this level.  
 4.Object => JavaScript stopped searching before reaching this level.
+
+<br>
+
+## Use a Mixin to Add Common Behavior Between Unrelated Objects
+
+상속이 문제가 되는 경우가 있다. 관계가 없는 두 경우의 객체에 상속되는 경우가 그렇다.  
+예를 들어 Bird와 AirPlane은 모두 fly하긴 하지만, 엄연히 다른 종류다.  
+이렇게 공통된 메서드를 가지고 있으면서 다른 종류의 객체가 있을 때,  
+유연하게 메서드를 상속시키는 방법은 무엇일까?  
+바로 mixin을 활용하는 것이다.
+
+<pre>
+<code>
+let flyMixin = function(obj) {
+  obj.fly = function() {
+    console.log("Flying, wooosh!");
+  }
+};
+</code>
+</pre>
+
+<pre>
+<code>
+let bird = {
+  name: "Donald",
+  numLegs: 2
+};
+
+let plane = {
+  model: "777",
+  numPassengers: 524
+};
+
+flyMixin(bird);
+flyMixin(plane);
+</code>
+</pre>
+
+이제 fly 메서드가 bird와 plane모두에 상속되었다.
+
+<pre>
+<code>
+bird.fly();
+plane.fly();
+</code>
+</pre>
+
+<br>
+
+## Use Closure to Protect Properties Within an Object from Being Modified Externally
+
+Bird의 name 속성은 public이었다. 왜냐하면 외부에서 조작이 가능한 것이었기 때문이다.
+
+<pre>
+<code>
+bird.name = "Duffy";
+</code>
+</pre>
+
+그러나 이렇게 외부에서 쉽게 조작이 가능하도록 만들어두면, 문제가 생기는 경우들이 있을 수 있다.  
+이런 문제를 막는 가장 쉬운 방법은 public을 private로 만드는 것이다.  
+constructor를 이용해서 만들 수 있는데, 이렇게 함으로써 변수의 scope를 변경시킬 수 있다.  
+또한 이 방법을 통해서 만들어진 변수는 constructor 내부의 메서드에 의해서만 바뀔 수 있다.
+
+<pre>
+<code>
+function Bird() {
+  let hatchedEgg = 10;
+
+  this.getHatchedEggCount = function() { 
+    return hatchedEgg;
+  };
+}
+let ducky = new Bird();
+ducky.getHatchedEggCount();
+</code>
+</pre>
+
+Here getHatchedEggCount is a privileged method, because it has access to the private variable hatchedEgg.  
+This is possible because hatchedEgg is declared in the same context as getHatchedEggCount.  
+In JavaScript, a function always has access to the context in which it was created. This is called closure.
+
+<br>
+
+## Understand the Immediately Invoked Function Expression (IIFE)
+
+<pre>
+<code>
+(function () {
+  console.log("Chirp, chirp!");
+})();
+</code>
+</pre>
+
+Note that the function has no name and is not stored in a variable.  
+The two parentheses () at the end of the function expression cause it to be immediately executed or invoked.  
+This pattern is known as an immediately invoked function expression or IIFE.
+
+## Use an IIFE to Create a Module
+
+IIFE는 보통 그룹관련기능에 많이 사용된다.
+
+ <pre>
+ <code>
+ function glideMixin(obj) {
+  obj.glide = function() {
+    console.log("Gliding on the water");
+  };
+}
+function flyMixin(obj) {
+  obj.fly = function() {
+    console.log("Flying, wooosh!");
+  };
+}
+ </code>
+ </pre>
+
+위의 그룹들을 아래와 같이 모듈에 넣을 수 있다.
+
+```javascript
+let motionModule = (function () {
+  return {
+    glideMixin: function (obj) {
+      obj.glide = function () {
+        console.log("Gliding on the water")
+      }
+    },
+    flyMixin: function (obj) {
+      obj.fly = function () {
+        console.log("Flying, wooosh!")
+      }
+    },
+  }
+})()
+```
+
+IIFE를 사용하고 있는 부분에 주목해보자. 즉시 객체를 반환하고 모듈에 담아넣고 있다.  
+이렇게 함으로써 다양한 기능을 하나의 개체 안에 담아놓고 사용할 수가 있다.
+
+<pre>
+<code>
+motionModule.glideMixin(duck);
+duck.glide();
+</code>
+</pre>

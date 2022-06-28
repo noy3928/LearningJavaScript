@@ -1,4 +1,4 @@
-const { copyObjectDeep } = require("./deepCopy")
+const { cloneObjectDeep } = require("./deepCopy")
 const _ = require("lodash")
 
 describe("cloneDeep", () => {
@@ -19,6 +19,7 @@ describe("cloneDeep", () => {
       m: 42 / +0,
     },
   }
+
   function compareObject(target1, target2) {
     const isObject =
       typeof target1 === "object" &&
@@ -37,7 +38,7 @@ describe("cloneDeep", () => {
   }
 
   it("should have different reference - my util", () => {
-    compareObject(obj, copyObjectDeep(obj))
+    compareObject(obj, cloneObjectDeep(obj))
   })
 
   it("should have different reference - lodash", () => {
@@ -45,6 +46,6 @@ describe("cloneDeep", () => {
   })
 
   it("should have value equality in object - toEqual", () => {
-    expect(copyObjectDeep(obj)).toEqual(obj)
+    expect(cloneObjectDeep(obj)).toEqual(obj)
   })
 })

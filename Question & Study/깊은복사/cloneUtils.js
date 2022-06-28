@@ -12,7 +12,7 @@ function getTag(value) {
   return toString.call(value)
 }
 
-function initClone(target, recursiveFunc) {
+function cloneByTag(target, recursiveFunc) {
   const tag = getTag(target)
   switch (tag) {
     case objTag:
@@ -79,4 +79,4 @@ function cloneRegExp(target) {
   return copiedRegExp
 }
 
-exports.initClone = initClone
+exports.cloneByTag = cloneByTag
