@@ -80,3 +80,141 @@ const tea4BlackTeamFCC = getTea(prepareBlackTea, 13)
 
 console.log(tea4GreenTeamFCC, tea4BlackTeamFCC)
 ```
+
+<br>
+
+## Understand the Hazards of Using Imperative Code
+
+함수형으로 프로그래밍하는 것은 매우 좋은 습관이다.  
+이것이 가져다 주는 유익은 매우 많다.  
+그러나 이것에 대해서 본격적으로 알아보기전에,  
+명령형으로 프로그래밍을 할 때, 발생할 수 있는 이슈들에 대해서 알아보자.
+
+<br>
+영어에서 명령형 시제는 명령을 내리기 위해서 많이 사용한다.  
+프로그래밍에서도 마찬가지로 컴퓨터에게 명령을 내리기 위해서,  
+명령형 스타일을 사용한다.  
+다양한 명령 구문들을 통해서 그렇게한다.
+
+<br>
+반대로 함수형 프로그래밍에서는 '선언적' 스타일을 사용한다.  
+이게 무슨말이냐하면,  
+내가 원하는 작업을 그저 컴퓨터에게 말하는것이다.
+
+자바스크립트에는 그런 선언적 스타일을 도와주는 많은 메서드들이 있다.  
+예를 들어 for문을 통하면 컴퓨터에게 배열의 각각 인덱스에 대해서 무엇을 하라고 하나하나 명령을 할 수 있겠지만,  
+map을 사용하면 datail한 부분들은 뒤로 감추고 그저 선언하는 방식으로 이용할 수 있다.  
+이런 방식으로 코드를 작성하면 sematic error를 피할 수 있다.
+
+<br>
+이런 시나리오를 생각해보자 :  
+당신은 브라우저에서 여러가지 웹 서핑을 하는 중이다.  
+그리고 당신이 열었던 페이지들을 추적해보고싶다.  
+이런 기능을 oop로 구현한다고 가정해보자.
+
+창 개체는 탭으로 구성되며 일반적으로 두개 이상의 창이 열려 있다.  
+각 Window 객체에 있는 각 열린 사이트의 제목은 배열로 유지된다.  
+브라우저에서 작업한 후(새 탭 열기, 창 병합 및 탭 닫기) 아직 열려 있는 탭을 print하려고 한다.  
+닫힌 탭은 배열에서 제거될테고, 새 탭(간단하게)이 배열 끝에 추가될 것이다.
+
+아래 코드는 tabOpen(), tabClose() 및 join()에 대한 함수와 함께 이 기능의 구현을 보여준다.  
+tabs 배열은 열린 페이지의 이름을 저장하는 window 개체의 일부이다.
+
+아래 코드는 제대로 동작하지 않는데,  
+코드를 뜯어보면서 한번 이해해보길 바란다.  
+tabClose에 문제가 있다.
+
+```javascript
+// tabs is an array of titles of each site open within the window
+const Window = function (tabs) {
+  this.tabs = tabs // We keep a record of the array inside the object
+}
+
+// When you join two windows into one window
+Window.prototype.join = function (otherWindow) {
+  this.tabs = this.tabs.concat(otherWindow.tabs)
+  return this
+}
+
+// When you open a new tab at the end
+Window.prototype.tabOpen = function (tab) {
+  this.tabs.push("new tab") // Let's open a new tab for now
+  return this
+}
+
+// When you close a tab
+Window.prototype.tabClose = function (index) {
+  // Only change code below this line
+
+  const tabsBeforeIndex = this.tabs.splice(0, index) // Get the tabs before the tab
+  const tabsAfterIndex = this.tabs.splice(index + 1) // Get the tabs after the tab
+
+  this.tabs = tabsBeforeIndex.concat(tabsAfterIndex) // Join them together
+
+  // Only change code above this line
+
+  return this
+}
+
+// Let's create three browser windows
+const workWindow = new Window([
+  "GMail",
+  "Inbox",
+  "Work mail",
+  "Docs",
+  "freeCodeCamp",
+]) // Your mailbox, drive, and other work sites
+const socialWindow = new Window(["FB", "Gitter", "Reddit", "Twitter", "Medium"]) // Social sites
+const videoWindow = new Window(["Netflix", "YouTube", "Vimeo", "Vine"]) // Entertainment sites
+
+// Now perform the tab opening, closing, and other operations
+const finalTabs = socialWindow
+  .tabOpen() // Open a new tab for cat memes
+  .join(videoWindow.tabClose(2)) // Close third tab in video window, and join
+  .join(workWindow.tabClose(1).tabOpen())
+console.log(finalTabs.tabs)
+```
+
+이 코드의 문제점은 splice에 있다. splice는 원본 배열에 변형을 가하는데,  
+이렇게하면 원치 않는 결과를 초래한다.  
+지금의 경우만해도 누락되는 리스트가 생겨버렸다.
+
+이것을 고치기 위해서는 불변성을 지켜줘야할 것 같다.  
+slice를 이용하면 원본 배열에는 변형을 가하지 않고 새로운 배열을 반환받을 수 있다.
+
+<br>
+
+## Avoid Mutations and Side Effects Using Functional Programming
+
+위의 챕터에서 살펴봤듯이 문제는 splice에 있었다.  
+왜냐, splice는 원본 배열에 변형을 가하기 때문이다.
+
+이것은 하나의 큰 패턴에 대한 예시인데,  
+우리는 함수를 만들고 그 안에서 객체내부의 값을 변화시킨다.
+
+함수형 프로그래밍의 한가지 핵심적인 원칙은 **무언가를 변화시키지 않는 것이다.**  
+변화는 버그를 만든다.  
+함수 내부에서 무언가가 변하지 않는다는 것을 안다면, 디버깅은 훨씬 쉬워질 것이다.
+
+이전 챕터에서 복잡한 연산이 있는 것도 아니었고,  
+그저 splice를 사용했는데, 버그가 만들어졌다.
+
+다시 한번 상기해보자면 함수형 프로그래밍에서는,  
+무언가 변화되거나 대체되는 것을 mutation이라고 부르고,  
+그로부터 나온 결과를 side effect라고 부른다.  
+함수는 순수함수이어야 한다.  
+이게 무슨 말이냐?? 어떤 side effect도 없어야 한다는 말이다.
+
+Let's try to master this discipline and not alter any variable or object in our code.
+
+```javascript
+// The global variable
+let fixedValue = 4
+
+function incrementer() {
+  // Only change code below this line
+  let returnedValue = fixedValue
+  return ++returnedValue
+  // Only change code above this line
+}
+```
