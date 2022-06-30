@@ -1,14 +1,13 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PageComponent = void 0;
-class PageComponent {
-    constructor() {
+var PageComponent = (function () {
+    function PageComponent() {
         this.element = document.createElement("ul");
         this.element.setAttribute("class", "page");
         this.element.textContent = "This is PageComponent";
     }
-    attachTo(parent, position = "afterbegin") {
+    PageComponent.prototype.attachTo = function (parent, position) {
+        if (position === void 0) { position = "afterbegin"; }
         parent.insertAdjacentElement(position, this.element);
-    }
-}
-exports.PageComponent = PageComponent;
+    };
+    return PageComponent;
+}());
+export { PageComponent };
