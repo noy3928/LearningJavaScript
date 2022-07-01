@@ -1,4 +1,6 @@
 import { PageComponent } from "./components/page/page.js";
+import { NoteComponent } from "./components/page/item/note.js";
+import { TodoComponent } from "./components/page/item/todo.js";
 import { ImageComponent } from "./components/page/item/image.js";
 var App = (function () {
     function App(appRoot) {
@@ -6,6 +8,10 @@ var App = (function () {
         this.page.attachTo(appRoot);
         var image = new ImageComponent("Image Title", "https://picsum.photos/600/300");
         image.attachTo(appRoot, "beforeend");
+        var note = new NoteComponent("Note Title", "Note Body");
+        note.attachTo(appRoot, "beforeend");
+        var todo = new TodoComponent("Todo Title", "Todo Item");
+        todo.attachTo(appRoot, "beforeend");
     }
     return App;
 }());
