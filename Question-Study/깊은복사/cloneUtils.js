@@ -4,6 +4,7 @@ const dateTag = "[object Date]"
 const mapTag = "[object Map]"
 const regexpTag = "[object RegExp]"
 const setTag = "[object Set]"
+const FuncTag = "[object Function]"
 
 function getTag(value) {
   if (value == null) {
@@ -11,6 +12,39 @@ function getTag(value) {
   }
   return toString.call(value)
 }
+
+const isArray = target => {
+  return target.constructor === Array
+}
+
+const isObject = target => {
+  return target.constructor === Object
+}
+
+const isDate = target => {
+  return target.constructor === Date
+}
+
+const isMap = target => {
+  return target.constructor === Map
+}
+
+const isSet = target => {
+  return target.constructor === Set
+}
+
+const isRegExp = target => {
+  return target.constructor === RegExp
+}
+
+const validation = [
+  { isArray, cloneArray },
+  { isObject, cloneObject },
+  { isDate, cloneDate },
+  { isRegExp, cloneRegExp },
+  { isMap, cloneMap },
+  { isSet, cloneSet },
+]
 
 function cloneByTag(target, recursiveFunc) {
   const tag = getTag(target)
@@ -33,7 +67,7 @@ function cloneByTag(target, recursiveFunc) {
 }
 
 function cloneArray(target, recursiveFunc) {
-  let result = []
+  const result = []
   target.forEach(prop => {
     result.push(recursiveFunc(prop))
   })
@@ -41,7 +75,7 @@ function cloneArray(target, recursiveFunc) {
 }
 
 function cloneObject(target, recursiveFunc) {
-  let result = {}
+  const result = {}
   for (const prop in target) {
     result[prop] = recursiveFunc(target[prop])
   }
@@ -49,7 +83,7 @@ function cloneObject(target, recursiveFunc) {
 }
 
 function cloneSet(target, recursiveFunc) {
-  let copiedSet = new Set()
+  const copiedSet = new Set()
   for (const prop of target) {
     copiedSet.add(recursiveFunc(prop))
   }
@@ -57,12 +91,12 @@ function cloneSet(target, recursiveFunc) {
 }
 
 function cloneDate(target) {
-  let date = target.constructor
+  const date = target.constructor
   return new date(+target)
 }
 
 function cloneMap(target, recursiveFunc) {
-  let copiedMap = new Map()
+  const copiedMap = new Map()
   for (const [key, value] of target) {
     copiedMap.set(key, recursiveFunc(value))
   }
