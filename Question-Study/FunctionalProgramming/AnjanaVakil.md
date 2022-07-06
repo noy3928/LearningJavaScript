@@ -102,3 +102,59 @@ greet("Alan")
 
 - 자바스크립트에서의 객체지향은 어렵기 때문에??ㅋㅋㅋ 그런데 자바스크립트에서 함수형을 사용하기 시작하면 모든 것이 굉장히 쉬워진다.
 - 커뮤니티가 형성되어 있기 때문에. 함수형 자바스크립트에 대한 커뮤니티가 굉장히 잘 형성되어있다.
+
+## Side Effect
+
+함수형으로 프로그래밍을 하면 해야하는 생각.  
+"내 프로그램은 무엇을 받고, 무엇을 반환하지??"
+
+```javascript
+//Imperative
+let name = "Alonzo"
+let greeting = "Hi"
+
+console.log(`${greeting}, ${name}!`)
+greeting = "Howdy"
+console.log(`${greeting}, ${name}!`)
+
+//declaretive
+function greet(greeting, name) {
+  return `${greeting}, ${name}`
+}
+greet("Hi", "Alonzo")
+greet("Hi", "Howdy")
+```
+
+프로그램 자체를 함수를 생각할 것.  
+무엇을 받고, 무엇을 반환할지.
+
+```javascript
+let thesis = { name: "Church's", date: 1936 }
+function renameThesis(newName) {
+  thesis.name = newName
+  console.log("Renamed!")
+}
+renameThesis("Church-Turing") // Renamed!
+thesis //{ name: "Church's", date: 1936 }
+```
+
+- 인자가 아닌, 외부자원을 활용한 것.
+
+아래는 함수형으로 변환한 버전 :
+
+```javascript
+const thesis = { name: "Church's", data: 1936 }
+function renameThesis(oldThesis, newName) {
+  return {
+    name: newName,
+    data: oldThesis.date,
+  }
+}
+
+const thesis2 = renameThesis(thesis, "Church-Turing")
+thesis
+thesis2
+```
+
+이것은 새로운 객체를 반환한다.
+그리고 외부 자원을 인자로 받아온다.
