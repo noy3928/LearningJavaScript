@@ -9,12 +9,6 @@ const resolvers = require("./resolvers")
 
 db.connect(DB_HOST)
 
-let notes = [
-  { id: "1", content: "This is a note", author: "Adam Scott" },
-  { id: "2", content: "This is another note", author: "Harlow Everly" },
-  { id: "3", content: "This is a note", author: "Riley Harrison" },
-]
-
 async function startApolloServer(typeDefs, resolvers) {
   const port = process.env.PORT || 4000
   // Same ApolloServer initialization as before

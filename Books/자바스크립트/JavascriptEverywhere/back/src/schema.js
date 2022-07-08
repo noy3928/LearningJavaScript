@@ -1,7 +1,7 @@
 const { gql } = require("apollo-server-express")
 
 //스키마 설정
-const typeDefs = gql`
+module.exports = gql`
   type Query {
     hello: String!
     notes: [Note!]!
@@ -14,5 +14,7 @@ const typeDefs = gql`
   }
   type Mutation {
     newNote(content: String!): Note!
+    updateNote(id: ID!, content: String!): Note!
+    deleteNote(id: ID!): Boolean!
   }
 `
