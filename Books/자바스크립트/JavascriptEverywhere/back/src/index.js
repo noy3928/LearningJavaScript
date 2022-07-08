@@ -1,13 +1,15 @@
 const express = require("express")
 const { ApolloServer, gql } = require("apollo-server-express")
+require("dotenv").config()
+const db = require("./db")
+const DB_HOST = process.env.DB_HOST
+db.connect(DB_HOST)
 
 let notes = [
   { id: "1", content: "This is a note", author: "Adam Scott" },
   { id: "2", content: "This is another note", author: "Harlow Everly" },
   { id: "3", content: "This is a note", author: "Riley Harrison" },
 ]
-
-const port = process.env.PORT || 4000
 //스키마 설정
 const typeDefs = gql`
   type Query {
@@ -46,6 +48,7 @@ const resolvers = {
   },
 }
 async function startApolloServer(typeDefs, resolvers) {
+  const port = process.env.PORT || 4000
   // Same ApolloServer initialization as before
   const server = new ApolloServer({ typeDefs, resolvers })
 
@@ -64,7 +67,7 @@ async function startApolloServer(typeDefs, resolvers) {
   })
 
   // Modified server startup
-  await new Promise(resolve => app.listen({ port: 4000 }, resolve))
+  await new Promise(resolve => app.listen({ port }, resolve))
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
 }
 
