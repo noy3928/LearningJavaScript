@@ -135,7 +135,7 @@ Timer 또한 자바스크립트의 고유한 기능이 아니다.
 
 Set the timer in the browser.
 
-![setTimeout의내부](./Img/IMG_1166.jpg "setTimeout의 내부")
+![setTimeout의내부](./IMG_1166.jpg "setTimeout의 내부")
 
 <br>
 
