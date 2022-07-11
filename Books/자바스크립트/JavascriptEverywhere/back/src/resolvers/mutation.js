@@ -1,3 +1,6 @@
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+
 module.exports = {
   newNote: async (parent, args, { models }) => {
     return await models.Note.create({
