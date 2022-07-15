@@ -6,8 +6,20 @@ const DB_HOST = process.env.DB_HOST
 const models = require("./models")
 const typeDefs = require("./schema")
 const resolvers = require("./resolvers")
+const jwt = require("jsonwebtoken")
 
 db.connect(DB_HOST)
+
+const getUser = token => {
+  if (token) {
+    try {
+      return jwt.verify(token, process.env.JWT_SECRET)
+    } catch (err) {
+      //토큰에 문제가 있으면 에러 던지기
+      throw new Error("Session invalid")
+    }
+  }
+}
 
 async function startApolloServer(typeDefs, resolvers) {
   const port = process.env.PORT || 4000
@@ -15,8 +27,12 @@ async function startApolloServer(typeDefs, resolvers) {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: () => {
-      return { models }
+    context: ({ req }) => {
+      //헤더에서 사용자 토큰 가져오기
+      const token = req.headers.authorization
+      const user = getUser(token)
+      console.log(user)
+      return { models, user }
     },
   })
 
