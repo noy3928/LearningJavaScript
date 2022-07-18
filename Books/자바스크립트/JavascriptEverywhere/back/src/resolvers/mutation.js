@@ -100,4 +100,42 @@ module.exports = {
     //JWT 생성 및 반환
     return jwt.sign({ id: user._id }, process.env.JWT_SECRET)
   },
+  toggleFavorite: async (parent, { id }, { models, user }) => {
+    //전달된 user context가 없으면 에러 던지기
+    if (!user) {
+      throw new AuthenticationError()
+    }
+
+    let noteCheck = await models.Note.findById(id)
+    const hasUser = noteCheck.favoritedBy.indexOf(user.id)
+
+    //사용자 목록에 있으면
+    if (hasUser >= 0) {
+      return await models.models.Note.findByIdAndUpdate(
+        id,
+        {
+          $pull: { favoritedBy: mongoose.Types.ObjectId(user.id) },
+          $inc: { favoriteCount: -1 },
+        },
+        {
+          new: true,
+        }
+      )
+    } else {
+      return await models.Note.findByIdAndUpdate(
+        id,
+        {
+          $pull: {
+            favoritedBy: mongoose.Types.ObjectId(user.id),
+          },
+          $inc: {
+            favoriteCount: 1,
+          },
+        },
+        {
+          new: true,
+        }
+      )
+    }
+  },
 }
