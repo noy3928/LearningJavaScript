@@ -14,3 +14,18 @@
 어떤 레리어는 페이지의 전체 길이만큼 클 수 있다.  
 그래서 컴포지터 스레드는 레이어를 타일 형태로 나눠 각 타일을 래스터 스레드로 보낸다.  
 래스터 스레드는 각 타일을 래스터화해 GPU 메모리에 저장한다.
+
+# Nice Threads
+
+정말 압축적으로 말해보자면, 브라우저에는 3개의 스레드가 있다.
+
+- UI thread : chrome itself. the tab bar, etc.
+- the renderer thread : we usaually call this the main thread. this is where all js, parsing html and css, style calculation, layout, and painting happens. there are one of these per tab.
+- the compositor thread : draws bitmaps to the screen via the GPU.
+
+## the compositor thread :
+
+- when we paint , we create bitmaps for the elements, put them onto layers, and prepare shadars for animations if neccessary.
+- after painting, the bitmaps are shared with a thread on the gpu to do the actual compositing.
+- the gpu process works with openGL to make magic happen on your screen.
+- the compositor thread is gpu-intensive thread.
