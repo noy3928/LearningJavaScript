@@ -192,3 +192,61 @@ function sum(numbers) {
 }
 sum([0, 1, 2, 3, 4])
 ```
+
+함수형 프로그램에서는 state를 mutable하게 관리하는 것을 원하지 않는다.  
+그런 이유로 함수형 프로그래밍에서는 for문이나 while문을 사용하는 것을 지양한다. 도리어 재귀함수를 사용할 것을 권장한다.
+재귀 함수는 2가지 파트를 가지고 있다.
+
+### 팩토리얼 함수를 2가지 버전으로 구현해보기
+
+iterativeFactorial = ƒ(n)
+
+```javascript
+function iterativeFactorial(n) {
+  let product = 1
+  while (n > 0) {
+    product *= n
+    n--
+  }
+  return product
+}
+```
+
+recursiveFactorial = ƒ(n)
+
+```javascript
+function recursiveFactorial(n) {
+  if (n === 0) return 1
+  return n * recursiveFactorial(n - 1)
+}
+```
+
+가독성 측면에서 봤을 때, 둘 중 어떤것이 더 나은가?
+
+다음으로는 피보나치 함수를 작성해보자.  
+iterativeFibonacci = ƒ(n)
+
+```javascript
+function iterativeFibonacci(n) {
+  // TODO your code goes here
+  let product = [0,1]
+  while(let i = 0; i < n; i++){
+    const tmp = product[i] + product[i + 1]
+    product.push(tmp)
+  }
+  return product[n]
+}
+```
+
+```javascript
+function recursiveFibonacci(n) {
+  // TODO your code goes here
+  if (n == 0) return 0
+  if (n == 1) return 1
+  else return recursiveFibonacci(n - 1) + recursiveFibonacci(n - 2)
+}
+```
+
+둘중 무엇이 작성할 때 더 쉬웠을까.... 흠... 글쎄...?!  
+재귀 코드 같은 경우에는 재귀적인 로직을 이해할 수 없었다면 더 어려웠을 것 같지만 이해하고 있다면 더 쉽게 느껴지는 것 같다.  
+재귀적인 로직을 이해하지 못하고 있다면 iterable하게 작성하는 것이 더 작성하기 쉬운 것 같다.
