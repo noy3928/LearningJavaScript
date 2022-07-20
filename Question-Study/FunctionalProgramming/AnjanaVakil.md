@@ -158,3 +158,37 @@ thesis2
 
 이것은 새로운 객체를 반환한다.
 그리고 외부 자원을 인자로 받아온다.
+
+<br>
+
+## Recursion
+
+똑같은 코드를 반복적으로 수행하고자 할 때
+
+함수형을 작성하고자 한다면,
+iteration 대신에 recursion을 작성하도록 하자.
+
+```javascript
+function sum(numbers) {
+  let total = 0
+  for (i = 0; i < numbers.length; i++) {
+    total += numbers[i]
+  }
+  return total
+}
+
+sum([0, 1, 2, 3, 4])
+```
+
+이 코드를 더 functional 하게 바꾼다면 아래와 같이 될 수 있다.
+
+```javascript
+function sum(numbers) {
+  if (numbers.length === 1) {
+    return numbers[0]
+  } else {
+    return numbers[0] + sum(numbers.slice(1))
+  }
+}
+sum([0, 1, 2, 3, 4])
+```
