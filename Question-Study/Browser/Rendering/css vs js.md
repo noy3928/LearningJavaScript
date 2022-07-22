@@ -13,3 +13,5 @@
 ### js를 사용할지 css를 사용할지는 전적으로 사용자에게 달려있다.
 
 - Using CSS or Javascript for animation is highly dependent on what you are trying to do. Javascript can be very powerful but is completely unnecessary if all you are doing is something like fading in a pop up window. Most of the time just using CSS is enough, but complicated animations can be difficult to do without using Javascript. If you decide to use Javascript, make sure to pick a suitable library which does not conflict with other libraries you may already be using.
+
+[참고자료 : https://medium.com/@iamryanyu/face-off-css-vs-js-animation-c3165ab993df]
