@@ -109,4 +109,71 @@ reflow가 눈사태 효과를 불러오는 탓에, 가능하면 reflow를 일으
 만약 정 사용해야 한다면, css style을 토글에 적용하고 싶다고 가정해보자.  
 이런 상황에서 가능하면 필요한 요소에 한해서만 변화를 만들고, 그 부모에서부터 변화를 만드는 행위를 하지 마라. 이렇게만 해도 약간의 성능상 이점을 얻을 수 있다.
 
-## optimization#3 : 가능하면 필요한 녀석에 한해서만 변경을 일으키기
+## optimization#3 : 한번만 측정하기
+
+계산을 반복하고 있는 부분이 반복되고 있지는 않는지 확인해보자.  
+만약 그렇다면 변수에 저장해놓고 재사용하기를 권장한다.
+
+최적화되지 않은 코드 :
+
+```javascript
+let list = document.getElementById("list")
+let listItems = Array.from(list.children)
+
+for (let i = 0; i < listItems.length; i++) {
+  let listParentHeight = list.parentElement.offsetHeight // No! : calculate parent height in every loop
+  listItems[i].style.marginTop =
+    Math.floor(listParentHeight / listItems.length - 10) + "px"
+}
+```
+
+최적화된 코드 :
+
+```javascript
+let list = document.getElementById("list")
+let listParent = list.parentElement
+let listParentHeight = listParent.offsetHeight // Yes! : store height of parent element
+let removedList = listParent.removeChild(list) // Yes! : remove list for batch editing
+let listItems = Array.from(removedList.children)
+
+for (let i = 0; i < listItems.length; i++) {
+  listItems[i].style.marginTop =
+    Math.floor(listParentHeight / listItems.length - 10) + "px"
+}
+```
+
+## optimization#4 : 요소에 변경이 자주 일어난다면, fixed/absolute position을 사용하기
+
+만약 사이트 내의 특정 요소가 그들의 레이아웃을 자주 변경시킨다면, 다른 요소의 레이아웃의 리플로우도 일으키게 될 것이다.
+
+예를 들어서, 요소의 크기가 움직이는 애니메이션이 이루어진다면, position:fixed 나 position: absolute를 사용하는 것이 훨씬 좋다. 이런 방식으로 애니메이션이 이루어진다면 요소가 주변에 있는 요소에게 영향을 미치지 않을 것이다. 덕분에 원치 않는 reflow가 일어나는 것을 줄일 수 있다.
+
+## optimization#5 : 레이아웃을 위해서는 flex box를 이용하기
+
+float보다 flex box의 성능이 우수하다. float 보단 flex box를 사용하자.
+
+## optimization#6 : display보단 visibility를 이용하기
+
+만약 특정 요소를 보여줬다가 감추는 작업을 해야한다면, display: none - display: block을 사용하기보다는, visibility:hidden - visibility : visible을 이용하자.
+
+이렇게 해야하는 이유가 있다. visibility를 이용해 화면에서 요소를 감추면, DOM layout에는 여전히 공간을 차지하는 중이다.  
+이렇게하면 요소의 넓이나 높이가 따로 변경되는 것이 아니기 때문에 브라우저가 recalculate할 필요가 없어진다.
+
+만약 요소를 화면에서 아예 삭제해야하는 경우가 아니라면 그냥 visibility : hidden을 이용하도록하자.
+
+## optimization#7 : js를 통해 style을 변경할거라면 한번에 다하기
+
+No Good :
+
+```javascript
+element.style.left = left //triggers reflow
+element.style.top = top // triggers reflow
+```
+
+Good :
+
+```javascript
+element.style.cssText += "left: " + "left" + "px; top: " + top + "px;" // triggers reflow once
+```
+
+## optimization#8 : js를 통해 style을 변경할거라면 한번에 다하기
