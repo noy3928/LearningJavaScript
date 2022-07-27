@@ -42,3 +42,13 @@ We just declare exactly what we want and React/virtual-dom will work out how to 
 [참고자료 : https://stackoverflow.com/questions/61245695/how-exactly-is-reacts-virtual-dom-faster]
 
 [참고자료 : https://www.geeksforgeeks.org/explain-dirty-checks-in-react-js/]
+
+[참고자료 : https://dev.to/karthikraja34/what-is-virtual-dom-and-why-is-it-faster-14p9]
+
+[참고자료 : https://javascript.plainenglish.io/why-is-the-virtual-dom-so-fast-cf7630643349]
+
+[참고자료 : https://www.optasy.com/blog/how-react-virtual-dom-works-why-it-so-much-faster-real-dom]
+
+[참고자료 : https://www.reddit.com/r/reactjs/comments/mo4g0t/why_virtual_dom_is_considered_faster_that/]
+
+[참고자료 : https://www.codecademy.com/article/react-virtual-dom]
