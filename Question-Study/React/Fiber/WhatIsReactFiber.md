@@ -47,6 +47,13 @@ fiber를 진행시키면 곧바로 일하거나, 미래를 위해 스케줄링�
 animation처럼 우선순위가 높다면 곧바로 실행하고, network를 통해 받아온 작업물 같은 경우에는 뒤로 미룬다.  
 이런 작업을 하기 위해서 내부적으로는 requestAnimationFrame 과 requestIdleCallback 함수를 사용한다.
 
+## Fiber Tree :
+
+실제로 2가지 tree가 있다.  
+한가지는 current Tree이고, 다른 한가지는 workInProgress tree이다.  
+current tree는 현재 화면에 있는 tree를 말한다. 때문에 react가 이것을 바꿀 수 없다.  
+대신에 리액트는 workInprogress tree에 있는 요소를 바꿀 수는 있다.
+
 ## 남아있는 질문 :
 
 - 우선순위를 정하는 기준은 무엇인가?
