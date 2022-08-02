@@ -186,3 +186,14 @@ element.style.cssText += "left: " + "left" + "px; top: " + top + "px;" // trigge
 2. CSS 규칙을 최소화하고 사용되지 않는 CSS 규칙을 삭제합니다.
 3. 애니메이션과 같이 복잡한 렌더링 변경이 필요한 경우 흐름 밖에서 변경합니다. 변경할 때는 절대 위치나 고정 위치를 사용합니다.
 4. 불필요하고 복잡한 CSS 선택기, 특히 하위 요소 선택기는 사용하지 않습니다. 이 경우 선택기를 일치시키기 위해 더 높은 CPU 처리량이 필요합니다.
+
+## 리플로우에 영향을 미치는 요소들 :
+
+리플로우에 영향을 미치는 것들은 사이즈나 위치에 관련된 것들이다.  
+그 외의 css요소들은 repaint 과정에 영향을 미칠 것이다.
+
+Changes in properties such as ‘display’, ‘floats’, resize the browser, insert new nodes… will result in a recalculation of positions and dimensions of elements, a “reflow”. On the other hand, certain css properties will cause “repaints” (change of colors, changes of assets, application of shadows …).
+
+### 최적화를 위한 자료 :
+
+[https://cresumerjang.github.io/2019/06/24/critical-rendering-path/]
