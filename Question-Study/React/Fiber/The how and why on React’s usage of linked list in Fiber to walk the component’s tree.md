@@ -1,5 +1,7 @@
 # The how and why on React’s usage of linked list in Fiber to walk the component’s tree
 
+[https://indepth.dev/posts/1007/the-how-and-why-on-reacts-usage-of-linked-list-in-fiber-to-walk-the-components-tree]
+
 fiber를 구현한 내부 소스코드를 들여다보면,  
 단순히 실질적인 문제를 해결하는 것을 넘어서서,  
 개발자의 성장에 도움이 되는 많은 자료들이 숨어있다.
