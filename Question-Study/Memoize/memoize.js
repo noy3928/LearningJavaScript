@@ -1,19 +1,27 @@
 const memoize = func => {
-  const priStore = new Map()
-  const refStore = new WeakMap()
+  if (typeof func !== "function") return new Error("Function required")
+
+  let store = new Map()
+  let weakStore = new WeakMap()
+
+  memoize.prototype.clear = function () {
+    store = new Map()
+    weakStore = new WeakMap()
+  }
+
   return (...args) => {
-    console.log(refStore)
     if (typeof args === "object") {
-      if (!refStore[args]) {
+      if (!store[args]) {
         console.log("저장이 안되어있는 상태")
-        refStore.set(args, func(...args))
+        store.set(args, func(...args))
       }
-      return refStore.get(args)
+      return store.get(args)
     } else {
       if (!priStore[args]) {
-        priStore.set(args, func(...args))
+        console.log("저장이 안되어있는 상태")
+        weakStore.set(args, func(...args))
       }
-      return priStore.get(args)
+      return weakStore.get(args)
     }
   }
 }
