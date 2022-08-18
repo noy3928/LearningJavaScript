@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.19"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "prac4",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
