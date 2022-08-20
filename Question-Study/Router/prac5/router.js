@@ -35,6 +35,7 @@ function getHashRoute() {
       route = routes[hashRoute]
     }
   })
+  return route
 }
 
 function hashRouterPush(pathName, el) {
