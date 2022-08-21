@@ -19,6 +19,7 @@ function home() {
 function about() {
   let div = document.createElement("div")
   let link = document.createElement("a")
+
   link.href = "#/"
   link.innerText = "Home"
 
@@ -75,8 +76,8 @@ function resolveRoute(route) {
 }
 
 function router(evt) {
+  console.log(window.location.hash)
   let url = window.location.hash.slice(1) || "/"
-  console.log("url", url)
   let route = resolveRoute(url)
 
   route()
