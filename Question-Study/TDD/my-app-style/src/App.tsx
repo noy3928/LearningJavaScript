@@ -1,7 +1,7 @@
-import React from "react"
-import logo from "./logo.svg"
-import "./App.css"
-import styled, { keyframes } from "styled-components"
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import styled, { keyframes } from 'styled-components';
 
 function App() {
   return (
@@ -15,20 +15,19 @@ function App() {
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           Learn React
         </AppLink>
       </Header>
     </Container>
-  )
+  );
 }
 
-export default App
+export default App;
 
 const Container = styled.div`
   text-align: center;
-`
+`;
 
 const Header = styled.header`
   background-color: #282c34;
@@ -39,7 +38,7 @@ const Header = styled.header`
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-`
+`;
 
 const spin = keyframes`
 from {
@@ -48,7 +47,7 @@ from {
     to {
       transform: rotate(360deg);
     }
-`
+`;
 
 const AppLogo = styled.img`
   height: 40vmin;
@@ -56,8 +55,8 @@ const AppLogo = styled.img`
   @media (prefers-reduced-motion: no-preference) {
     animation: ${spin} infinite 20s linear;
   }
-`
+`;
 
 const AppLink = styled.a`
   color: #61dafb;
-`
+`;
