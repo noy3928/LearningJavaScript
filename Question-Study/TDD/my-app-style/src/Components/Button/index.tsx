@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 interface Props {
@@ -13,18 +13,16 @@ interface ContainerProps {
   readonly hoverColor: string;
 }
 
-export const Button = ({
-  label,
-  backgroundColor = '#304FFE',
-  hoverColor = '#1E40FF',
-  onClick,
-}: Props) => {
-  return (
-    <Container backgroundColor={backgroundColor} hoverColor={hoverColor} onClick={onClick}>
-      <Label>{label}</Label>
-    </Container>
-  );
-};
+export class Button extends Component<Props> {
+  render() {
+    const { label, backgroundColor = '#304FFE', hoverColor = '#1E40FF', onClick } = this.props;
+    return (
+      <Container backgroundColor={backgroundColor} hoverColor={hoverColor} onClick={onClick}>
+        <Label>{label}</Label>
+      </Container>
+    );
+  }
+}
 
 const Container = styled.div<ContainerProps>`
   text-align: center;
