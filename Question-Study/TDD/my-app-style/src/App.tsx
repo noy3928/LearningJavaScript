@@ -1,14 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-import { Button, Input } from 'Components';
+import { Button, Input, ToDoItem } from 'Components';
 
 function App() {
   return (
     <Container>
       <Contents>
+        <ToDoItem label="추가된 할 일" onDelete={() => alert('삭제')} />
         <InputContainer>
           <Input placeholder="할 일을 입력해 주세요" onChange={(text) => console.log(text)} />
           <Button label="추가" onClick={() => alert('추가')} />
