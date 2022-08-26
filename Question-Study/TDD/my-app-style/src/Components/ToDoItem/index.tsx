@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Button } from 'Components/Button';
 
@@ -7,14 +7,18 @@ interface Props {
   readonly onDelete?: () => void;
 }
 
-export const ToDoItem = ({ label, onDelete }: Props) => {
-  return (
-    <Container>
-      <Label>{label}</Label>
-      <Button label="삭제" backgroundColor="#FF1744" hoverColor="#F01440" onClick={onDelete} />
-    </Container>
-  );
-};
+export class ToDoItem extends Component<Props> {
+  render() {
+    const { label, onDelete } = this.props;
+
+    return (
+      <Container>
+        <Label>{label}</Label>
+        <Button label="삭제" backgroundColor="#FF1744" hoverColor="#F01440" onClick={onDelete} />
+      </Container>
+    );
+  }
+}
 
 const Container = styled.div`
   display: flex;

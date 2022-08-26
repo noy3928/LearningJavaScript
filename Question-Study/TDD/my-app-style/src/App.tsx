@@ -1,44 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import styled from 'styled-components';
 
 import { Button, Input, ToDoItem } from 'Components';
 
-function App() {
-  const [toDo, setToDo] = useState('');
-  const [toDoList, setToDoList] = useState<string[]>([]);
+interface Props {}
 
-  const addToDo = (): void => {
+interface State {
+  readonly toDo: string;
+  readonly toDoList: string[];
+}
+class App extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      toDo: '',
+      toDoList: [],
+    };
+  }
+
+  private addToDo = (): void => {
+    const { toDo, toDoList } = this.state;
     if (toDo) {
-      setToDoList([...toDoList, toDo]);
-      setToDo('');
+      this.setState({
+        toDo: '',
+        toDoList: [...toDoList, toDo],
+      });
     }
   };
 
-  const deleteToDo = (index: number): void => {
-    let list = [...toDoList];
+  private deleteToDo = (index: number): void => {
+    let list = [...this.state.toDoList];
     list.splice(index, 1);
-    setToDoList(list);
+    this.setState({
+      toDoList: list,
+    });
   };
 
-  return (
-    <Container>
-      <Contents>
-        <ToDoListContainer data-testid="toDoList">
-          {toDoList.map((item, index) => (
-            <ToDoItem key={item} label={item} onDelete={() => deleteToDo(index)} />
-          ))}
-        </ToDoListContainer>
-        <InputContainer>
-          <Input
-            placeholder="할 일을 입력해 주세요"
-            value={toDo}
-            onChange={(text) => setToDo(text)}
-          />
-          <Button label="추가" onClick={addToDo} />
-        </InputContainer>
-      </Contents>
-    </Container>
-  );
+  render() {
+    const { toDo, toDoList } = this.state;
+    return (
+      <Container>
+        <Contents>
+          <ToDoListContainer data-testid="toDoList">
+            {toDoList.map((item, index) => (
+              <ToDoItem key={item} label={item} onDelete={() => this.deleteToDo(index)} />
+            ))}
+          </ToDoListContainer>
+          <InputContainer>
+            <Input
+              placeholder="할 일을 입력해 주세요"
+              value={toDo}
+              onChange={(text) => this.setState({ toDo: text })}
+            />
+            <Button label="추가" onClick={this.addToDo} />
+          </InputContainer>
+        </Contents>
+      </Container>
+    );
+  }
 }
 
 export default App;
