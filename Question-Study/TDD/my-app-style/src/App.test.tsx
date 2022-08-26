@@ -10,6 +10,9 @@ test("renders learn react link", () => {
 describe("<App/>", () => {
   it("renders component correctly", () => {
     const { container } = render(<App />)
+    const appLogo = screen.getByAltText("logo")
+    expect(appLogo).toBeInTheDocument()
+    expect(appLogo).toHaveAttribute("src", "logo.svg")
     // expect(container.getElementsByClassName("App-logo")).toHaveLength(1)
     // expect(container.getElementsByClassName("App-logo")[0]).toHaveAttribute(
     //   "src",
