@@ -3,13 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 import styled, { keyframes } from 'styled-components';
 
-import { Button } from 'Components';
+import { Button, Input } from 'Components';
 
 function App() {
   return (
     <Container>
       <Contents>
-        <Button label="테스트" onClick={() => alert('추가')} />
+        <InputContainer>
+          <Input placeholder="할 일을 입력해 주세요" onChange={(text) => console.log(text)} />
+          <Button label="추가" onClick={() => alert('추가')} />
+        </InputContainer>
       </Contents>
     </Container>
   );
@@ -32,4 +35,8 @@ const Contents = styled.div`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+`;
+
+const InputContainer = styled.div`
+  display: flex;
 `;
