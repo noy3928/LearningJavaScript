@@ -1,11 +1,15 @@
+import type { IScriptSnapshot } from 'typescript';
 import React, { useState, Component } from 'react';
 import styled from 'styled-components';
 
 import { Button, Input, ToDoItem } from 'Components';
 
-interface Props {}
+interface Props {
+  readonly id?: string;
+}
 
 interface State {
+  readonly id?: string;
   readonly toDo: string;
   readonly toDoList: string[];
 }
@@ -59,6 +63,39 @@ class App extends Component<Props, State> {
       </Container>
     );
   }
+
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+    console.log('getDerivedStateFromProps');
+
+    return null;
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+  }
+
+  getSnapshotBeforeUpdate(prevProps: Props, prevState: State) {
+    console.log('getSnapshotBeforeUpdate');
+
+    return {
+      testData: true,
+    };
+  }
+
+  componentDidUpdate(prevProps: Props, prevState: State, snapshot: IScriptSnapshot) {
+    console.log('componentDidUpdate');
+  }
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    console.log('shouldComponentUpdate');
+    return true;
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo) {}
 }
 
 export default App;
