@@ -3,22 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import styled, { keyframes } from 'styled-components';
 
+import { Button } from 'Components';
+
 function App() {
   return (
     <Container>
-      <Header>
-        <AppLogo src={logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <AppLink
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </AppLink>
-      </Header>
+      <Contents>
+        <Button label="테스트" onClick={() => alert('추가')} />
+      </Contents>
     </Container>
   );
 }
@@ -26,37 +18,18 @@ function App() {
 export default App;
 
 const Container = styled.div`
-  text-align: center;
-`;
-
-const Header = styled.header`
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
 `;
 
-const spin = keyframes`
-from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-`;
-
-const AppLogo = styled.img`
-  height: 40vmin;
-  pointer-events: none;
-  @media (prefers-reduced-motion: no-preference) {
-    animation: ${spin} infinite 20s linear;
-  }
-`;
-
-const AppLink = styled.a`
-  color: #61dafb;
+const Contents = styled.div`
+  display: flex;
+  background-color: #ffffff;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 `;
