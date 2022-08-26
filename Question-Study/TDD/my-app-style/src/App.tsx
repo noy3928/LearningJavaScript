@@ -29,8 +29,12 @@ function App() {
           ))}
         </ToDoListContainer>
         <InputContainer>
-          <Input placeholder="할 일을 입력해 주세요" onChange={(text) => setToDo(text)} />
-          <Button label="추가" onClick={() => alert(toDo)} />
+          <Input
+            placeholder="할 일을 입력해 주세요"
+            value={toDo}
+            onChange={(text) => setToDo(text)}
+          />
+          <Button label="추가" onClick={addToDo} />
         </InputContainer>
       </Contents>
     </Container>
