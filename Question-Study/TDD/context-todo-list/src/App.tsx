@@ -1,44 +1,19 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
-import { ToDoItem, InputContainer } from "Components"
+import { InputContainer, ToDoList } from "Components"
+import { ToDoListProvider } from "Contexts"
 
 function App() {
-  const [toDo, setToDo] = useState("")
-  const [toDoList, setToDoList] = useState<string[]>([])
-
-  const addToDo = (): void => {
-    if (toDo) {
-      setToDoList([...toDoList, toDo])
-      setToDo("")
-    }
-  }
-
-  const deleteToDo = (index: number): void => {
-    let list = [...toDoList]
-    list.splice(index, 1)
-    setToDoList(list)
-  }
-
   return (
-    <Container>
-      <Contents>
-        <ToDoListContainer data-testid="toDoList">
-          {toDoList.map((item, index) => (
-            <ToDoItem
-              key={item}
-              label={item}
-              onDelete={() => deleteToDo(index)}
-            />
-          ))}
-        </ToDoListContainer>
-        <InputContainer
-          toDo={toDo}
-          onChange={text => setToDo(text)}
-          onAdd={addToDo}
-        />
-      </Contents>
-    </Container>
+    <ToDoListProvider>
+      <Container>
+        <Contents>
+          <ToDoList />
+          <InputContainer />
+        </Contents>
+      </Container>
+    </ToDoListProvider>
   )
 }
 
