@@ -35,11 +35,3 @@ const Contents = styled.div`
   border-radius: 8px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 `
-
-const ToDoListContainer = styled.div`
-  min-width: 350px;
-  height: 400px;
-  overflow-y: scroll;
-  border: 1px solid #bdbdbd;
-  margin-bottom: 20px;
-`

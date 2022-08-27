@@ -13,7 +13,7 @@ export const InputContainer = () => {
   return (
     <Container>
       <Input
-        placeholder="할 일을 압력해 주세요"
+        placeholder="할 일을 입력해 주세요"
         value={toDo}
         onChange={setToDo}
       />
