@@ -1,5 +1,5 @@
 {
-  "name": "context-todo-list",
+  "name": "react-router-todo-list",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
