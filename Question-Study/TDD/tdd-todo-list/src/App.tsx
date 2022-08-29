@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { PageHeader } from 'Components';
+import { PageHeader, Button } from 'Components';
 import styled from 'styled-components';
 
 function App() {
