@@ -1,6 +1,85 @@
-# Routing
+# Introduction
 
-## Dynamic Import
+- Link가 viewport안에 들어오면, 기본적으로 데이터를 prefetch할 것이다. Static generation을 이용하는 페이지인 경우. 만약 server-rendered를 이용하고 있는 페이지라면 prefetch를 하지 않을 것이다.
+
+# Imperatively
+
+- useRouter를 이용하는 것이 imperatively
+- 기본적으로 Link를 사용할 것을 권장하는 뉘앙스인 것 같다.
+
+<br>
+
+# Shallow Routing
+
+Shallow 라우팅은 데이터 fetching을 다시하는 일 없이 URL을 바꿀 수 있게 해준다.  
+getServerSideProps, getStaticProps, and getInitialProps을 포함해서.
+
+아마 업데이트된 pathname과 query를 router object를 통해서 받게 될 것이다.  
+state를 잃어버리는 일 없이.
+
+shallow routing을 하기 위해서,  
+shallow option을 true로 만들어라.  
+다음 예시를 보자.
+
+```javascript
+import { useEffect } from "react"
+import { useRouter } from "next/router"
+
+// Current URL is '/'
+function Page() {
+  const router = useRouter()
+
+  useEffect(() => {
+    // Always do navigations after the first render
+    router.push("/?counter=10", undefined, { shallow: true })
+  }, [])
+
+  useEffect(() => {
+    // The counter changed!
+  }, [router.query.counter])
+}
+
+export default Page
+```
+
+URL은 /?counter=10로 업데이트 될 것이고, 페이지는 변하지 않을 것이다.  
+오직 route의 state만 변하게 될 것이다.
+또한 componentDidUpdate를 통해서 URL이 변화되는 것을 관찰할 수 있다.
+
+```javascript
+componentDidUpdate(prevProps) {
+  const { pathname, query } = this.props.router
+  // verify props have changed to avoid an infinite loop
+  if (query.counter !== prevProps.router.query.counter) {
+    // fetch data based on the new query
+  }
+}
+```
+
+### Caveat
+
+shallow routing은 현재 페이지 안에서 url 변경하는 것에 대해서만 효과가 있다.  
+예를 들어서, 한번 가정을 해보자.  
+우리가 pages/about.js라는 페이지를 가지고 있고,  
+이것을 실행하려고 한다고 :
+
+```javascript
+router.push("/?counter=10", "/about?counter=10", { shallow: true })
+```
+
+저것은 새로운 페이지 이기 때문에, 현재 페이지는 unload되고,  
+새로운 것이 load 될 것이고,  
+shallow routing을 할 거라고 요청했음에도 불구하고,  
+새로운 데이터가 fetching 되기를 기다릴 것이다.
+
+shallow routing이 미들웨어와 사용될 때,  
+이것은 새로운 페이지가 현재 페이지와 매칭 될 것이라는 것을 보장하지 않을 것이다.  
+이것은 미들웨어가 동적으로 재작성하는 것이 가능하기 때문이고,  
+클라이언트 사이트에서 데이터를 fetch하지 않고서는 보장받을 수 없기 때문에  
+shallow가 skip된다.  
+그래서 shallow route change는 반드시 항상 shallow로 대해야한다.
+
+# Dynamic Import
 
 넥스트는 외부 라이르러리를 import문으로 lazy loading할 수 있도록 지원한다. 그리고 리액트 컴포넌트도 next/dynamic으로 레이지 로딩할 수 있다.  
 지연된 로딩은 초기 성능을 향상시키는데에 도움을 준다. 페이지에 렌더링해야 하는 필수적인 자바스크립트 요소들을 줄여줌으로써 그런 일들이 가능해지는 것이다.  
